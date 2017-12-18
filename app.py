@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import random
 import datetime
 import logging
+import json
 
 app = Flask(__name__)
 
@@ -21,9 +22,22 @@ def start():
 @app.route("/move", methods=["POST"])
 def move():
 
-    #print(request.__dict__)
-    moves = ["up", "down", "left", "right"]
-    move = random.choice(moves)
+    data = json.loads(request.data.decode("utf-8"))
+    my_snake = next(cell for cell in data["snakes"] if cell["id"] == data["you"])
+    my_head = my_snake["coords"][0]
+
+    target = data["food"][0]
+
+    move = "left"
+    if target[0] - my_head[0] < 0:
+        move = "left"
+    elif target[0] - my_head[0] > 0:
+        move = "right"
+    elif target[1] - my_head[1] < 0:
+        move = "up"
+    elif target[1] - my_head[1] > 0:
+        move = "down"
+
     response = {
         "move": move
     }
