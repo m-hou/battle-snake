@@ -1,0 +1,36 @@
+{
+    "you": "72c3bf44-b284-4f60-940c-811ec9db0bb6",
+    "width": 20,
+    "turn": 0,
+    "snakes": [
+        {
+            "taunt": "",
+            "name": "My Snake's Name!",
+            "id": "72c3bf44-b284-4f60-940c-811ec9db0bb6",
+            "health_points": 100,
+            "coords": [
+                [
+                    3,
+                    16
+                ],
+                [
+                    3,
+                    16
+                ],
+                [
+                    3,
+                    16
+                ]
+            ]
+        }
+    ],
+    "height": 20,
+    "game_id": "b4784498-79ef-4dbc-bc81-fe51a96119c2",
+    "food": [
+        [
+            7,
+            18
+        ]
+    ],
+    "dead_snakes": []
+}

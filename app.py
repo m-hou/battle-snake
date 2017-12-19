@@ -1,3 +1,6 @@
+from game import Game
+from board import Board
+
 from flask import Flask, request, jsonify
 import random
 import datetime
@@ -23,23 +26,26 @@ def start():
 def move():
 
     data = json.loads(request.data.decode("utf-8"))
-    my_snake = next(cell for cell in data["snakes"] if cell["id"] == data["you"])
-    my_head = my_snake["coords"][0]
+    board = Board(data)
+    game = Game(board)
+    best_move = game.best_move()
+    # my_snake = next(cell for cell in data["snakes"] if cell["id"] == data["you"])
+    # my_head = my_snake["coords"][0]
 
-    target = data["food"][0]
+    # target = data["food"][0]
 
-    move = "left"
-    if target[0] - my_head[0] < 0:
-        move = "left"
-    elif target[0] - my_head[0] > 0:
-        move = "right"
-    elif target[1] - my_head[1] < 0:
-        move = "up"
-    elif target[1] - my_head[1] > 0:
-        move = "down"
+    # move = "left"
+    # if target[0] - my_head[0] < 0:
+    #     move = "left"
+    # elif target[0] - my_head[0] > 0:
+    #     move = "right"
+    # elif target[1] - my_head[1] < 0:
+    #     move = "up"
+    # elif target[1] - my_head[1] > 0:
+    #     move = "down"
 
     response = {
-        "move": move
+        "move": best_move
     }
     app.logger.debug(move)
     return jsonify(response)
