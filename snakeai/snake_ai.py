@@ -1,5 +1,5 @@
-from snake import Move
 from collections import namedtuple
+from snakemodel.snake import Move
 
 
 class SnakeAIv1():

@@ -1,6 +1,6 @@
 import json
-from snake_ai import SnakeAIv1
-from game import Game
+from snakeai.snake_ai import SnakeAIv1
+from snakemodel.game import Game
 from flask import Flask, request, jsonify
 
 

@@ -1,6 +1,6 @@
 from enum import Enum
-from snake import Snake
-from cell import Cell
+from .snake import Snake
+from .cell import Cell
 
 
 class EntityId(Enum):

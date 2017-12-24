@@ -1,5 +1,5 @@
 from copy import deepcopy
-from board import Board
+from .board import Board
 
 
 class Game:

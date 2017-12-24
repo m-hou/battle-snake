@@ -1,5 +1,5 @@
 from enum import Enum
-from cell import Cell
+from .cell import Cell
 
 
 class Move(Enum):
