@@ -133,8 +133,8 @@ class Board:
         """
         live_snakes = set(snake
                           for snake in self.get_snakes()
-                          if snake.health_points > 0 or
-                          self.cell_within_bounds(snake.head) or
+                          if snake.health_points > 0 and
+                          self.cell_within_bounds(snake.head) and
                           not self._check_snake_collision(snake))
 
         dead_snakes = set(self.get_snakes()) - live_snakes
