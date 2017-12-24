@@ -1,3 +1,4 @@
+import os
 import json
 from snakeai.snake_ai import SnakeAIv1
 from snakemodel.game import Game
@@ -37,4 +38,5 @@ def move():
 
 if __name__ == "__main__":
     print("Starting server...")
-    app.run(port=8080, debug=True)
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
