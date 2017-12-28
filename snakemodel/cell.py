@@ -12,6 +12,9 @@ class Cell:
     def __hash__(self):
         return hash((self.x, self.y))
 
+    def __lt__(self, other):
+        return True
+
     def distance(self, other):
         """Calculate the Manhattan distance between cells"""
         return abs(self.x - other.x) + abs(self.y - other.y)
