@@ -1,6 +1,7 @@
 import os
 import json
-from snakeai.snake_ai import SnakeAIv1
+from snakeai.heuristic import Heuristic
+from snakeai.snake_ai import SnakeAI
 from snakemodel.game import Game
 from flask import Flask, request, jsonify
 
@@ -26,7 +27,8 @@ def move():
 
     data = json.loads(request.data.decode("utf-8"))
     game = Game(data)
-    snake_ai = SnakeAIv1(game)
+    heuristic = Heuristic()
+    snake_ai = SnakeAI(game, heuristic)
     best_move = snake_ai.best_move()
 
     response = {

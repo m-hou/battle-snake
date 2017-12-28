@@ -1,23 +1,18 @@
 from collections import namedtuple
 from snakemodel.snake import Move
-from snakemodel.board import EntityId
 import numpy as np
 
 
-class SnakeAIv1():
+class SnakeAI():
     """
     An AI to play Battle Snake
 
     Version 1: Heuristic search, assuming other snakes search with depth of 1
     """
 
-    DISCOUNT_FACTOR = 0.9
-    DEPTH = 1
-    LARGE_PENALTY = np.array([-1000000000000, 0])
-    FOOD_SCORE = 100
-
-    def __init__(self, game):
+    def __init__(self, game, heuristic):
         self.game = game
+        self.heuristic = heuristic
 
     def best_move(self):
         """
@@ -27,9 +22,9 @@ class SnakeAIv1():
         immediate move.
         """
         return self._best_move_helper(
-            self.game.you, self.game.board)[0].get_move()
+            self.game.you, self.game.board, self.heuristic.DEPTH)[0].get_move()
 
-    def _best_move_helper(self, snake_id, board, depth=DEPTH):
+    def _best_move_helper(self, snake_id, board, depth):
         """
         Helper for best_move.
 
@@ -59,9 +54,9 @@ class SnakeAIv1():
         board, according to the heuristic, calculated to the given depth.
         Assume other snakes make the best immediate move.
         """
-        board_eval = self._heuristic(snake_id, board)
-        if np.array_equal(board_eval, self.LARGE_PENALTY):
-            return self.LARGE_PENALTY
+        board_eval = self.heuristic.heuristic(snake_id, board)
+        if np.array_equal(board_eval, self.heuristic.LARGE_PENALTY):
+            return self.heuristic.LARGE_PENALTY
         if depth <= 1:
             return board_eval
         other_snakes_best_move_mapping = \
@@ -69,44 +64,6 @@ class SnakeAIv1():
              for other_snake_id in self.game.get_other_snake_ids(snake_id)}
         next_board = self.game.simulate_moves(
             board, other_snakes_best_move_mapping)
-        return board_eval + self.DISCOUNT_FACTOR * self._best_move_helper(
-            self.game.you, next_board, depth - 1).evaluation
-
-    def _heuristic(self, snake_id, board):
-        """
-        A heuristic to evaluate the board.
-
-        Evaluate from the prespective of the snake with snake_id.
-        """
-        if snake_id in [dead_snake_id
-                        for dead_snake_id, _ in board.dead_snakes.items()]:
-            return self.LARGE_PENALTY
-
-        snake = board.snakes[snake_id]
-
-        reachable_squares = self._flood_fill(board, snake.head)
-        squares_occupied = len(set(snake.body))
-
-        evaluation = 0
-        for food in board.food:
-            evaluation += self.FOOD_SCORE / (snake.head.distance(food)**2 + 1)
-        evaluation += len(board.snakes[snake_id].body) * self.FOOD_SCORE
-        return np.array([reachable_squares + squares_occupied, evaluation])
-
-    def _flood_fill(self, board, cell):
-        """Count of safe squares that can be reached from cell."""
-        visited = set()
-        count = 0
-        to_visit = [cell]
-        while to_visit:
-            curr_cell = to_visit.pop()
-            if (curr_cell not in visited
-                    and board.cell_within_bounds(curr_cell)
-                    and (board.get_entity_at_cell(curr_cell) in
-                         [EntityId.EMPTY, EntityId.FOOD]
-                         or curr_cell == cell)):
-                count += 1
-                for move in Move:
-                    to_visit.append(move.apply_move_to_cell(curr_cell))
-            visited.add(curr_cell)
-        return count
+        return board_eval + self.heuristic.DISCOUNT_FACTOR * \
+            self._best_move_helper(
+                self.game.you, next_board, depth - 1).evaluation
