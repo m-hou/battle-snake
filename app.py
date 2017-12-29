@@ -1,6 +1,7 @@
 import os
 import json
 from snakeai.heuristic import Heuristic
+from snakeai.adversial_ai import AdversialAI
 from snakeai.group_ai import GroupAI
 from snakemodel.game import Game
 from flask import Flask, request, jsonify
@@ -28,7 +29,9 @@ def move():
     data = json.loads(request.data.decode("utf-8"))
     game = Game(data)
     heuristic = Heuristic()
-    snake_ai = GroupAI(game, heuristic)
+    snake_ai = (AdversialAI(game, heuristic)
+                if len(game.board.snakes) == 2
+                else GroupAI(game, heuristic))
     best_move = snake_ai.best_move()
 
     response = {
