@@ -15,8 +15,8 @@ def start():
     # game after every POST to our server
     app.logger.info(request.__dict__)
     snake = {
-        "color": "#ffffff",
-        "name": "My Snake's Name!"
+        "color": os.environ.get('color', '#ffffff'),
+        "name": os.environ.get('name', 'default_snake_boi'),
     }
 
     return jsonify(snake)
