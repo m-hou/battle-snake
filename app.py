@@ -26,10 +26,14 @@ def start():
 @app.route("/move", methods=["POST"])
 def move():
     data = json.loads(request.data.decode("utf-8"))
-    game = Game(data)
-    heuristic = Heuristic()
-    snake_ai = SnakeAI(game, heuristic)
-    best_move = snake_ai.best_move()
+    try:
+        game = Game(data)
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(game, heuristic)
+        best_move = snake_ai.best_move()
+    except Exception as exception:
+        app.logger.debug(data)
+        raise exception
 
     app.logger.debug("{} \n {}".format(data, best_move))
     response = {
