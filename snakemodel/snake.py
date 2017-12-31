@@ -68,7 +68,7 @@ class Snake:
         """
         self.body.append(self.body[-1])
 
-    def __len___(self):
+    def __len__(self):
         return len(self.body)
 
     def __eq__(self, other):
