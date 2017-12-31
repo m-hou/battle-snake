@@ -94,7 +94,7 @@ class SnakeAI():
     def _get_snake_next_possible_cells(self, snake_id, board):
         """Get possible cells that a snake can occupy on the next turn."""
         snake = board.snakes[snake_id]
-        next_body_cells = set(snake.body[:-1])
+        next_body_cells = set(snake.body[1:])
         possible_head_cells = {move: head_cell
                                for move, head_cell in
                                snake.get_possible_moves().items()
