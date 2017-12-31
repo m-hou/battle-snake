@@ -1,5 +1,4 @@
 from collections import namedtuple
-from snakemodel.snake import Move
 import numpy as np
 
 
@@ -71,32 +70,54 @@ class SnakeAI():
                 self.game.you, next_board, depth - 1).evaluation
 
     def _get_candidate_moves(self, snake_id, board):
-        """Get moves that will not lead to immediate death."""
-        my_snake = board.snakes[snake_id]
-        _, possible_head_cells = self._get_snake_next_possible_cells(
+        """Moves that will not lead to immediate death from other snakes."""
+        _, possible_head_cells, _ = self._get_possible_snake_transitions(
             self.game.you,
             board)
-        candidate_moves = [move for move in Move]
-        for move, head_cell in possible_head_cells.items():
-            for other_snake_id in self.game.get_other_snake_ids(snake_id):
-                other_body_cell, other_possible_heads = \
-                    self._get_snake_next_possible_cells(
-                        other_snake_id,
-                        board)
-                other_snake = board.snakes[other_snake_id]
-                if head_cell in other_body_cell or (
-                        (head_cell in other_possible_heads and
-                         len(other_snake) >= len(my_snake))):
-                    candidate_moves.remove(move)
-                    break
-        return candidate_moves
+        safe_transitions = list(
+            filter(lambda possible_head_cell: all(
+                self._is_possible_head_cell_safe(
+                    possible_head_cell,
+                    snake_id,
+                    board)),
+                   possible_head_cells))
+        return [safe_transition.move for safe_transition in safe_transitions]
 
-    def _get_snake_next_possible_cells(self, snake_id, board):
+    def _is_possible_head_cell_safe(self, possible_head_cell, snake_id, board):
+        """
+        Check if a possible head cell is safe to make.
+
+        Checks if the head cell does not overlap with any other snakes' next
+        body cells and their next possible head cells. If it overlaps with a
+        possible head cell, check if the snake is longer than the other snake.
+        """
+        my_snake = board.snakes[snake_id]
+        return list(
+            map(lambda possible_transition:
+                possible_head_cell.head_cell not in
+                possible_transition.body_cells and
+                (possible_head_cell.head_cell not in
+                 possible_transition.possible_head_cells or
+                 len(my_snake) > len(possible_transition.snake)),
+                [self._get_possible_snake_transitions(other_snake_id, board)
+                 for other_snake_id in
+                 self.game.get_other_snake_ids(snake_id)]))
+
+    def _get_possible_snake_transitions(self, snake_id, board):
         """Get possible cells that a snake can occupy on the next turn."""
         snake = board.snakes[snake_id]
-        next_body_cells = set(snake.body[1:])
-        possible_head_cells = {move: head_cell
+        body_cells = snake.body[1:]
+        PossibleHeadCells = namedtuple("PossibleHeadCell",
+                                       "move, head_cell")
+        possible_head_cells = [PossibleHeadCells(move=move,
+                                                 head_cell=head_cell)
                                for move, head_cell in
                                snake.get_possible_moves().items()
-                               if head_cell in next_body_cells}
-        return next_body_cells, possible_head_cells
+                               if head_cell not in body_cells]
+        PossibleTransitions = namedtuple(
+            "PossibleTransitions",
+            "body_cells, possible_head_cells, snake")
+        return PossibleTransitions(
+            body_cells=body_cells,
+            possible_head_cells=possible_head_cells,
+            snake=snake)
