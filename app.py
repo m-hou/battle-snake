@@ -32,10 +32,10 @@ def move():
         snake_ai = SnakeAI(game, heuristic)
         best_move = snake_ai.best_move()
     except Exception as exception:
-        app.logger.debug(data)
+        app.logger.info(data)
         raise exception
 
-    app.logger.debug("{} \n {}".format(data, best_move))
+    app.logger.info("{} \n {}".format(data, best_move))
     response = {
         "move": best_move
     }
@@ -45,8 +45,7 @@ def move():
 if __name__ == "__main__":
     print("Starting server...")
     port = int(os.environ.get("PORT", 8080))
-    debug = bool(os.environ.get("DEBUG", True))
     handler = RotatingFileHandler("debug.log")
-    handler.setLevel(logging.DEBUG)
+    handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
-    app.run(host='0.0.0.0', port=port, debug=debug)
+    app.run(host='0.0.0.0', port=port)
