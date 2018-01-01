@@ -1,3 +1,4 @@
+from itertools import chain
 from enum import Enum
 from .snake import Snake
 from .cell import Cell
@@ -157,9 +158,10 @@ class Board:
             snake)
         if not _other_snakes_at_snake_head:
             return True
-        for other_snake in _other_snakes_at_snake_head:
-            if snake.head in other_snake.body[1:]:
-                return False
+        if snake.head in chain.from_iterable(
+                [other_snake.body[1:]
+                 for other_snake in _other_snakes_at_snake_head]):
+            return False
 
         return self._is_collision_largest_head(
             snake, _other_snakes_at_snake_head)
