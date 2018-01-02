@@ -25,9 +25,6 @@ class Heuristic():
 
         snake = board.snakes[snake_id]
 
-        reachable_squares = safe_square_count(board, snake.head)
-        squares_occupied = len(set(snake.body))
-
         food_evaluation = 0
         for food in board.food:
             food_evaluation += \
@@ -43,5 +40,4 @@ class Heuristic():
 
         return np.array(
             [dist_from_tail_penalty,
-             reachable_squares + squares_occupied,
              food_evaluation])
