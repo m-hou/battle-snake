@@ -71,16 +71,16 @@ class SnakeAI():
 
     def get_candidate_moves(self, snake_id, board):
         """Moves that will not lead to immediate death from other snakes."""
-        _, possible_head_cells, _ = self._get_possible_snake_transitions(
+        _, possible_heads, _ = self._get_possible_snake_transitions(
             self.game.you,
             board)
         safe_transitions = list(
-            filter(lambda possible_head_cell: self._is_possible_head_cell_safe(
-                possible_head_cell, snake_id, board),
-                   possible_head_cells))
+            filter(lambda possible_head: self._is_possible_head_safe(
+                possible_head, snake_id, board),
+                   possible_heads))
         return [safe_transition.move for safe_transition in safe_transitions]
 
-    def _is_possible_head_cell_safe(self, possible_head_cell, snake_id, board):
+    def _is_possible_head_safe(self, possible_head, snake_id, board):
         """
         Check if snake is safe against all possible transitions of all snakes.
 
@@ -91,14 +91,14 @@ class SnakeAI():
 
         def _could_snake_die_other_snakes_transition(possible_transition):
             """Could snake die from any transition of another snake."""
-            head_cell = possible_head_cell.head_cell
-
-            could_overlap_body = head_cell in possible_transition.body_cells
-            could_overlap_head = possible_head_cell.head_cell in \
+            head_cell = possible_head.head_cell
+            (other_body_cells, other_possible_heads,
+             other_snake) = possible_transition
+            could_overlap_body = head_cell in other_body_cells
+            could_overlap_head = head_cell in (
                 [other_head_cell.head_cell
-                 for other_head_cell in
-                 possible_transition.possible_head_cells]
-            my_snake_longer = len(my_snake) > len(possible_transition.snake)
+                 for other_head_cell in other_possible_heads])
+            my_snake_longer = len(my_snake) > len(other_snake)
             return not could_overlap_body and not (
                 could_overlap_head and not my_snake_longer)
 
@@ -113,17 +113,10 @@ class SnakeAI():
         """Get possible cells that a snake can occupy on the next turn."""
         snake = board.snakes[snake_id]
         body_cells = snake.body[:-1]
-        PossibleHeadCells = namedtuple("PossibleHeadCell",
-                                       "move, head_cell")
-        possible_head_cells = [PossibleHeadCells(move=move,
-                                                 head_cell=head_cell)
-                               for move, head_cell in
-                               snake.get_possible_moves().items()
-                               if head_cell not in body_cells]
-        PossibleTransitions = namedtuple(
-            "PossibleTransitions",
-            "body_cells, possible_head_cells, snake")
-        return PossibleTransitions(
-            body_cells=body_cells,
-            possible_head_cells=possible_head_cells,
-            snake=snake)
+        PossibleHeads = namedtuple("PossibleHeads", "move, head_cell")
+        possible_heads = [PossibleHeads(move=move,
+                                        head_cell=head_cell)
+                          for move, head_cell in
+                          snake.get_possible_moves().items()
+                          if head_cell not in body_cells]
+        return body_cells, possible_heads, snake
