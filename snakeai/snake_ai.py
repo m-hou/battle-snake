@@ -42,7 +42,7 @@ class SnakeAI():
                         {snake_id: candidate_move}),
                     depth)
             )
-            for candidate_move in self._get_candidate_moves(snake_id, board)]
+            for candidate_move in self.get_candidate_moves(snake_id, board)]
         return max(
             move_evals,
             key=lambda move_eval: tuple(move_eval.evaluation))
@@ -69,7 +69,7 @@ class SnakeAI():
             self._best_move_helper(
                 self.game.you, next_board, depth - 1).evaluation
 
-    def _get_candidate_moves(self, snake_id, board):
+    def get_candidate_moves(self, snake_id, board):
         """Moves that will not lead to immediate death from other snakes."""
         _, possible_head_cells, _ = self._get_possible_snake_transitions(
             self.game.you,
@@ -97,7 +97,9 @@ class SnakeAI():
                 possible_head_cell.head_cell not in
                 possible_transition.body_cells and
                 (possible_head_cell.head_cell not in
-                 possible_transition.possible_head_cells or
+                 [possible_head_cell.head_cell
+                  for possible_head_cell in
+                  possible_transition.possible_head_cells] or
                  len(my_snake) > len(possible_transition.snake)),
                 [self._get_possible_snake_transitions(other_snake_id, board)
                  for other_snake_id in
@@ -106,7 +108,7 @@ class SnakeAI():
     def _get_possible_snake_transitions(self, snake_id, board):
         """Get possible cells that a snake can occupy on the next turn."""
         snake = board.snakes[snake_id]
-        body_cells = snake.body[1:]
+        body_cells = snake.body[:-1]
         PossibleHeadCells = namedtuple("PossibleHeadCell",
                                        "move, head_cell")
         possible_head_cells = [PossibleHeadCells(move=move,
