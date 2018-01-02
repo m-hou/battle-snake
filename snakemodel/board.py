@@ -1,3 +1,4 @@
+from itertools import chain
 from enum import Enum
 from .snake import Snake
 from .cell import Cell
@@ -135,7 +136,7 @@ class Board:
                           for snake in self.get_snakes()
                           if snake.health_points > 0 and
                           self.cell_within_bounds(snake.head) and
-                          not self._check_snake_collision(snake))
+                          self._check_snake_collision(snake))
 
         dead_snakes = set(self.get_snakes()) - live_snakes
 
@@ -156,10 +157,11 @@ class Board:
         _other_snakes_at_snake_head = self._get_other_snakes_at_snake_head(
             snake)
         if not _other_snakes_at_snake_head:
+            return True
+        if snake.head in chain.from_iterable(
+                [other_snake.body[1:]
+                 for other_snake in _other_snakes_at_snake_head]):
             return False
-        for other_snake in _other_snakes_at_snake_head:
-            if snake.head in other_snake.body[:-1]:
-                return True
 
         return self._is_collision_largest_head(
             snake, _other_snakes_at_snake_head)
@@ -176,7 +178,7 @@ class Board:
 
     def _is_collision_largest_head(self, snake, other_snakes_at_snake_head):
         """Return True if snake is the longest snake in the collision."""
-        return snake > max(other_snakes_at_snake_head)
+        return len(snake) > len(max(other_snakes_at_snake_head, key=len))
 
     def _update_board_after_move(self):
         """
@@ -207,9 +209,13 @@ class Board:
                 if snake.head in self.food}
 
     def get_snakes(self):
-        """return all the live snakes"""
+        """Return all the live snakes."""
         return [snake for _, snake in self.snakes.items()]
 
     def _spawn_food(self):
         """stub"""
         pass
+
+    def __eq__(self, other):
+        if isinstance(self, other.__class__):
+            return self.__dict__ == other.__dict__
