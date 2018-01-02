@@ -75,35 +75,39 @@ class SnakeAI():
             self.game.you,
             board)
         safe_transitions = list(
-            filter(lambda possible_head_cell: all(
-                self._is_possible_head_cell_safe(
-                    possible_head_cell,
-                    snake_id,
-                    board)),
+            filter(lambda possible_head_cell: self._is_possible_head_cell_safe(
+                possible_head_cell, snake_id, board),
                    possible_head_cells))
         return [safe_transition.move for safe_transition in safe_transitions]
 
     def _is_possible_head_cell_safe(self, possible_head_cell, snake_id, board):
         """
-        Check if a possible head cell is safe to make.
+        Check if snake is safe against all possible transitions of all snakes.
 
         Checks if the head cell does not overlap with any other snakes' next
         body cells and their next possible head cells. If it overlaps with a
         possible head cell, check if the snake is longer than the other snake.
         """
+
+        def _could_snake_die_other_snakes_transition(possible_transition):
+            """Could snake die from any transition of another snake."""
+            head_cell = possible_head_cell.head_cell
+
+            could_overlap_body = head_cell in possible_transition.body_cells
+            could_overlap_head = possible_head_cell.head_cell in \
+                [other_head_cell.head_cell
+                 for other_head_cell in
+                 possible_transition.possible_head_cells]
+            my_snake_longer = len(my_snake) > len(possible_transition.snake)
+            return not could_overlap_body and not (
+                could_overlap_head and not my_snake_longer)
+
         my_snake = board.snakes[snake_id]
-        return list(
-            map(lambda possible_transition:
-                possible_head_cell.head_cell not in
-                possible_transition.body_cells and
-                (possible_head_cell.head_cell not in
-                 [possible_head_cell.head_cell
-                  for possible_head_cell in
-                  possible_transition.possible_head_cells] or
-                 len(my_snake) > len(possible_transition.snake)),
+        return all(list(
+            map(_could_snake_die_other_snakes_transition,
                 [self._get_possible_snake_transitions(other_snake_id, board)
                  for other_snake_id in
-                 self.game.get_other_snake_ids(snake_id)]))
+                 self.game.get_other_snake_ids(snake_id)])))
 
     def _get_possible_snake_transitions(self, snake_id, board):
         """Get possible cells that a snake can occupy on the next turn."""
