@@ -74,10 +74,10 @@ class SnakeAI():
         _, possible_heads, _ = self._get_possible_snake_transitions(
             self.game.you,
             board)
-        safe_transitions = list(
-            filter(lambda possible_head: self._is_possible_head_safe(
+        safe_transitions = filter(
+            lambda possible_head: self._is_possible_head_safe(
                 possible_head, snake_id, board),
-                   possible_heads))
+            possible_heads)
         return [safe_transition.move for safe_transition in safe_transitions]
 
     def _is_possible_head_safe(self, possible_head, snake_id, board):
@@ -103,11 +103,10 @@ class SnakeAI():
                 could_overlap_head and not my_snake_longer)
 
         my_snake = board.snakes[snake_id]
-        return all(list(
-            map(_could_snake_die_other_snakes_transition,
-                [self._get_possible_snake_transitions(other_snake_id, board)
-                 for other_snake_id in
-                 self.game.get_other_snake_ids(snake_id)])))
+        return all(map(_could_snake_die_other_snakes_transition,
+                   [self._get_possible_snake_transitions(other_snake_id, board)
+                    for other_snake_id in
+                    self.game.get_other_snake_ids(snake_id)]))
 
     def _get_possible_snake_transitions(self, snake_id, board):
         """Get possible cells that a snake can occupy on the next turn."""
