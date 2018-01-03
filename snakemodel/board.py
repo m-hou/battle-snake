@@ -192,6 +192,7 @@ class Board:
         snake_consumed_cell_mapping = self._get_snake_consumed_cell_mapping()
         for snake, food_cell in snake_consumed_cell_mapping.items():
             snake.grow()
+            snake.health_points = 100
             self.food.remove(food_cell)
 
         for _ in range(len(snake_consumed_cell_mapping)):

@@ -37,3 +37,18 @@ class TestSnakeAI(unittest.TestCase):
             self.assertEqual(
                 snake_ai.get_candidate_moves(game.you, game.board),
                 [Move.DOWN])
+
+    def test_corner(self):
+        """
+        Test case where snake is in the corner.
+
+        Only move is to move down.
+        """
+        corner_file = os.path.join(
+            dir,
+            'test_cases/corner.json')
+        with open(corner_file, "r") as corner:
+            game = Game(json.load(corner))
+            heuristic = Heuristic()
+            snake_ai = SnakeAI(game, heuristic)
+            self.assertEqual(snake_ai.best_move(), Move.DOWN.get_move())
