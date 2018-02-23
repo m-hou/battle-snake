@@ -29,6 +29,9 @@ class Heuristic():
 
         snake = board.snakes[snake_id]
 
+        reachable_squares = safe_square_count(board, snake.head)
+        squares_occupied = len(snake.body)
+
         food_evaluation = CANT_FIND
         for food in board.food:
             food_evaluation = min(
@@ -38,13 +41,15 @@ class Heuristic():
 
         max_dist_to_tail = self._get_max_dist_from_tail(
             snake, board, food_evaluation)
-        dist_from_tail_penalty = min(
-            0,
-            max_dist_to_tail - get_travel_distance(
-                board, snake.head, snake.body[-1]))
+        travel_distance = get_travel_distance(
+                board, snake.head, snake.body[-1])
+        dist_from_tail_penalty = -travel_distance if (
+            travel_distance == CANT_FIND) else (
+            min(0, max_dist_to_tail - travel_distance))
 
         return np.array(
             [dist_from_tail_penalty,
+             reachable_squares + squares_occupied,
              -food_evaluation + length_score])
 
     def _get_max_dist_from_tail(self, snake, board, food_evaluation):
