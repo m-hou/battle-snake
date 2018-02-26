@@ -34,9 +34,7 @@ class Heuristic():
 
         food_evaluation = CANT_FIND
         for food in board.food:
-            food_evaluation = min(
-                food_evaluation,
-                get_travel_distance(board, snake.head, food))
+            food_evaluation = min(food_evaluation, food.distance(snake.head))
         length_score = len(board.snakes[snake_id].body) * self.FOOD_SCORE
 
         max_dist_to_tail = self._get_max_dist_from_tail(
