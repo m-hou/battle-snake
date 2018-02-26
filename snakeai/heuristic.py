@@ -53,10 +53,12 @@ class Heuristic():
              -food_evaluation + length_score])
 
     def _get_max_dist_from_tail(self, snake, board, food_evaluation):
+        """Threshold where there is no penalty for being too far from tail."""
+
         if snake.health_points == self.MAX_HEALTH:
             return 1000
         elif food_evaluation == CANT_FIND:
-            return 1
+            return 2
         else:
-            return 1 + (self.MAX_HEALTH - snake.health_points) / (
+            return 2 + (self.MAX_HEALTH - snake.health_points) / (
                 self.MAX_HEALTH) * (board.width + board.height)
