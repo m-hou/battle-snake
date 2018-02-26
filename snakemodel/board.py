@@ -21,7 +21,7 @@ class Board:
     """
 
     def __init__(self, data):
-        self.game_id = data["game_id"]
+        self.game_id = data["game_id"] if "game_id" in data else 0
         self.width = data["width"]
         self.height = data["height"]
         self.food = self._create_food(data["food"])

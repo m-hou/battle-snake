@@ -7,7 +7,7 @@ class Game:
 
     def __init__(self, data):
         self.board = Board(data)
-        self.game_id = data["game_id"]
+        self.game_id = data["game_id"] if "game_id" in data else 0
         self.turn = data["turn"]
         self.you = data["you"]
         self.snake_ids = self._get_snake_ids(data)
