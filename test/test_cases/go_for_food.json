@@ -1,0 +1,68 @@
+{
+    "you": "6054407e-721e-4692-a1ca-e388b617003e",
+    "width": 15,
+    "turn": 70,
+    "snakes": [
+        {
+            "taunt": "",
+            "name": "dEv_SnEkY_b0i",
+            "id": "573d54a4-0b38-472a-bb57-a124c8ab4b94",
+            "health_points": 30,
+            "coords": [
+                [
+                    2,
+                    0
+                ],
+                [
+                    3,
+                    0
+                ],
+                [
+                    3,
+                    1
+                ]
+            ]
+        },
+        {
+            "taunt": "",
+            "name": "dEv_SnEkY_b0i",
+            "id": "6054407e-721e-4692-a1ca-e388b617003e",
+            "health_points": 30,
+            "coords": [
+                [
+                    9,
+                    10
+                ],
+                [
+                    10,
+                    10
+                ],
+                [
+                    10,
+                    9
+                ]
+            ]
+        }
+    ],
+    "height": 15,
+    "game_id": "0b22609f-936b-4c21-9dda-c1cb466fe836",
+    "food": [
+        [
+            1,
+            1
+        ],
+        [
+            11,
+            5
+        ],
+        [
+            9,
+            11
+        ],
+        [
+            12,
+            5
+        ]
+    ],
+    "dead_snakes": []
+}

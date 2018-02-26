@@ -47,3 +47,22 @@ class TestBoardTransition(unittest.TestCase):
                      Move.DOWN,
                      collision_game.get_other_snake_ids(my_snake_id)[0]:
                      Move.UP}), collision_next_game.board)
+
+    def test_corner(self):
+        """Test transition where snake is at a corner."""
+        corner_file = os.path.join(dir, 'test_cases/corner.json')
+        corner_next_file = os.path.join(
+            dir,
+            'test_cases/corner_next.json')
+        with open(corner_file, "r") as corner, open(
+                corner_next_file, 'r') as corner_next:
+            collision_game = Game(json.load(corner))
+            collision_next_game = Game(json.load(corner_next))
+            my_snake_id = collision_game.you
+            self.assertEqual(
+                collision_game.simulate_moves(
+                    collision_game.board,
+                    {my_snake_id:
+                     Move.UP,
+                     collision_game.get_other_snake_ids(my_snake_id)[0]:
+                     Move.DOWN}), collision_next_game.board)
