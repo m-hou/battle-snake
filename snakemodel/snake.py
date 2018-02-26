@@ -32,13 +32,14 @@ class Snake:
     """
 
     def __init__(self, snake_data):
-        self.taunt = snake_data["taunt"]
-        self.name = snake_data["name"]
-        self.id = snake_data["id"]
-        self.health_points = snake_data["health_points"]
-        coords = snake_data["coords"]
-        self.head = Cell(*coords[0])
-        self.body = [Cell(*coord) for coord in coords]
+        self.taunt = snake_data['taunt']
+        self.name = snake_data['name']
+        self.id = snake_data['id']
+        self.health_points = snake_data['health']
+        coords = snake_data['body']
+        self.head = Cell(coords['data'][0]['x'], coords['data'][0]['y'])
+        self.body = [Cell(coord['x'], coord['y'])
+                     for coord in coords['data']]
 
     def get_possible_moves(self):
         """
@@ -76,4 +77,5 @@ class Snake:
             return self.__dict__ == other.__dict__
 
     def __hash__(self):
-        return hash((self.taunt, self.name, self.id, self.health_points, self.head, *self.body))
+        return hash((self.taunt, self.name, self.id, self.health_points, 
+                     self.head, *self.body))
