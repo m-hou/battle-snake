@@ -41,7 +41,7 @@ class Board:
     def _create_dead_snakes(self, dead_snakes_data):
         """Parse dead snakes from dead_snakes_data."""
         return {dead_snake_data['id']: Snake(dead_snake_data)
-                for dead_snake_data in dead_snakes_data}
+                for dead_snake_data in dead_snakes_data['data']}
 
     def _build_grid(self):
         """Build a grid of EntityId that represents the current board state."""

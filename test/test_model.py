@@ -3,8 +3,7 @@ import json
 import os
 from snakemodel.game import Game
 from snakemodel.snake import Move
-
-dir = os.path.dirname(__file__)
+from test_util import load_game
 
 
 class TestBoardTransition(unittest.TestCase):
@@ -69,20 +68,17 @@ class TestBoardTransition(unittest.TestCase):
 
     def test_new_api(self):
         """Test new API."""
-        corner_file = os.path.join(dir, 'test_cases/new_api.json')
-
-        with open(corner_file, "r") as corner:
-            collision_game = Game(json.load(corner))
-            my_snake_id = collision_game.you
-            self.assertEqual(
-                collision_game.simulate_moves(
-                    collision_game.board,
-                    {my_snake_id:
-                     Move.UP,
-                     collision_game.get_other_snake_ids(my_snake_id)[0]:
-                     Move.DOWN}), collision_game.simulate_moves(
-                    collision_game.board,
-                    {my_snake_id:
-                     Move.UP,
-                     collision_game.get_other_snake_ids(my_snake_id)[0]:
-                     Move.DOWN}))
+        curr_game = load_game('test_cases/new_api.json')
+        me = curr_game.you
+        self.assertEqual(
+            curr_game.simulate_moves(
+                curr_game.board,
+                {me:
+                    Move.UP,
+                    curr_game.get_other_snake_ids(me)[0]:
+                    Move.DOWN}), curr_game.simulate_moves(
+                curr_game.board,
+                {me:
+                    Move.UP,
+                    curr_game.get_other_snake_ids(me)[0]:
+                    Move.DOWN}))
