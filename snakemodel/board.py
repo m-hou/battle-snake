@@ -21,12 +21,13 @@ class Board:
     """
 
     def __init__(self, data):
-        self.game_id = data['game_id'] if "game_id" in data else 0
+        self.game_id = data.get('game_id', 0)
         self.width = data['width']
         self.height = data['height']
         self.food = self._create_food(data['food'])
         self.snakes = self._create_snakes(data['snakes'])
-        self.dead_snakes = self._create_dead_snakes(data.get('dead_snakes', []))
+        self.dead_snakes = self._create_dead_snakes(
+            data.get('dead_snakes', {'data': []}))
         self._build_grid()
 
     def _create_food(self, food_data):
@@ -116,8 +117,8 @@ class Board:
         """
 
         self._move_snakes(snake_id_move_mapping)
-        self._resolve_deaths()
         self._update_board_after_move()
+        self._resolve_deaths()
         self._build_grid()
         return self
 

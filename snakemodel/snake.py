@@ -32,7 +32,6 @@ class Snake:
     """
 
     def __init__(self, snake_data):
-        self.taunt = snake_data['taunt']
         self.name = snake_data['name']
         self.id = snake_data['id']
         self.health_points = snake_data['health']
@@ -77,5 +76,5 @@ class Snake:
             return self.__dict__ == other.__dict__
 
     def __hash__(self):
-        return hash((self.taunt, self.name, self.id, self.health_points, 
+        return hash((self.name, self.id, self.health_points,
                      self.head, *self.body))
