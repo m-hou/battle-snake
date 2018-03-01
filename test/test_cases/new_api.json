@@ -1,0 +1,179 @@
+{
+    "you": {
+        "id": "02a47d58-87e4-4e90-8415-75384e88bf75",
+        "health": 87,
+        "length": 3,
+        "taunt": "TIMED OUT",
+        "name": "1 snakey boi",
+        "object": "snake",
+        "body": {
+            "data": [
+                {
+                    "object": "point",
+                    "x": 2,
+                    "y": 0
+                },
+                {
+                    "object": "point",
+                    "x": 2,
+                    "y": 1
+                },
+                {
+                    "object": "point",
+                    "x": 2,
+                    "y": 2
+                }
+            ],
+            "object": "list"
+        }
+    },
+    "width": 18,
+    "height": 17,
+    "id": 40149,
+    "turn": 13,
+    "snakes": {
+        "data": [
+            {
+                "id": "02a47d58-87e4-4e90-8415-75384e88bf75",
+                "health": 87,
+                "length": 3,
+                "taunt": "TIMED OUT",
+                "name": "1 snakey boi",
+                "object": "snake",
+                "body": {
+                    "data": [
+                        {
+                            "object": "point",
+                            "x": 2,
+                            "y": 0
+                        },
+                        {
+                            "object": "point",
+                            "x": 2,
+                            "y": 1
+                        },
+                        {
+                            "object": "point",
+                            "x": 2,
+                            "y": 2
+                        }
+                    ],
+                    "object": "list"
+                }
+            },
+            {
+                "id": "f245d4eb-4342-4686-9c6c-49aaf9fdcc07",
+                "health": 99,
+                "length": 5,
+                "taunt": "left",
+                "name": "Aggglu",
+                "object": "snake",
+                "body": {
+                    "data": [
+                        {
+                            "object": "point",
+                            "x": 2,
+                            "y": 8
+                        },
+                        {
+                            "object": "point",
+                            "x": 3,
+                            "y": 8
+                        },
+                        {
+                            "object": "point",
+                            "x": 4,
+                            "y": 8
+                        },
+                        {
+                            "object": "point",
+                            "x": 5,
+                            "y": 8
+                        },
+                        {
+                            "object": "point",
+                            "x": 6,
+                            "y": 8
+                        }
+                    ],
+                    "object": "list"
+                }
+            },
+            {
+                "id": "1beb8a5d-97d1-49ce-b4df-0769e5ba17a0",
+                "health": 87,
+                "length": 3,
+                "taunt": "",
+                "name": "0ff3b768-1a83-11e8-92e0-8c85901cffa7",
+                "object": "snake",
+                "body": {
+                    "data": [
+                        {
+                            "object": "point",
+                            "x": 1,
+                            "y": 7
+                        },
+                        {
+                            "object": "point",
+                            "x": 2,
+                            "y": 7
+                        },
+                        {
+                            "object": "point",
+                            "x": 3,
+                            "y": 7
+                        }
+                    ],
+                    "object": "list"
+                }
+            }
+        ],
+        "object": "list"
+    },
+    "food": {
+        "data": [
+            {
+                "object": "point",
+                "x": 16,
+                "y": 16
+            },
+            {
+                "object": "point",
+                "x": 16,
+                "y": 6
+            },
+            {
+                "object": "point",
+                "x": 5,
+                "y": 9
+            },
+            {
+                "object": "point",
+                "x": 17,
+                "y": 5
+            },
+            {
+                "object": "point",
+                "x": 6,
+                "y": 7
+            },
+            {
+                "object": "point",
+                "x": 7,
+                "y": 15
+            },
+            {
+                "object": "point",
+                "x": 11,
+                "y": 13
+            },
+            {
+                "object": "point",
+                "x": 1,
+                "y": 15
+            }
+        ],
+        "object": "list"
+    },
+    "object": "world"
+}

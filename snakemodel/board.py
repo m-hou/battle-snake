@@ -21,27 +21,28 @@ class Board:
     """
 
     def __init__(self, data):
-        self.game_id = data["game_id"]
-        self.width = data["width"]
-        self.height = data["height"]
-        self.food = self._create_food(data["food"])
-        self.snakes = self._create_snakes(data["snakes"])
-        self.dead_snakes = self._create_dead_snakes(data["dead_snakes"])
+        self.game_id = data.get('game_id', 0)
+        self.width = data['width']
+        self.height = data['height']
+        self.food = self._create_food(data['food'])
+        self.snakes = self._create_snakes(data['snakes'])
+        self.dead_snakes = self._create_dead_snakes(
+            data.get('dead_snakes', {'data': []}))
         self._build_grid()
 
     def _create_food(self, food_data):
         """Parse food from food_data."""
-        return set(Cell(*food) for food in food_data)
+        return set(Cell(food.get('x'), food.get('y')) for food in food_data.get('data'))
 
     def _create_snakes(self, snakes_data):
         """Parse snakes from snakes_data."""
-        return {snake_data["id"]: Snake(snake_data)
-                for snake_data in snakes_data}
+        return {snake_data['id']: Snake(snake_data)
+                for snake_data in snakes_data['data']}
 
     def _create_dead_snakes(self, dead_snakes_data):
         """Parse dead snakes from dead_snakes_data."""
-        return {dead_snake_data["id"]: Snake(dead_snake_data)
-                for dead_snake_data in dead_snakes_data}
+        return {dead_snake_data['id']: Snake(dead_snake_data)
+                for dead_snake_data in dead_snakes_data['data']}
 
     def _build_grid(self):
         """Build a grid of EntityId that represents the current board state."""
@@ -116,8 +117,8 @@ class Board:
         """
 
         self._move_snakes(snake_id_move_mapping)
-        self._resolve_deaths()
         self._update_board_after_move()
+        self._resolve_deaths()
         self._build_grid()
         return self
 

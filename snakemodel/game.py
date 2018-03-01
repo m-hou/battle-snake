@@ -7,9 +7,9 @@ class Game:
 
     def __init__(self, data):
         self.board = Board(data)
-        self.game_id = data["game_id"]
-        self.turn = data["turn"]
-        self.you = data["you"]
+        self.game_id = data.get('game_id', 0)
+        self.turn = data['turn']
+        self.you = data['you']['id']
         self.snake_ids = self._get_snake_ids(data)
 
     def simulate_moves(self, board, snake_id_move_mapping):
@@ -18,7 +18,7 @@ class Game:
 
     def _get_snake_ids(self, data):
         """Get the ids of all the players"""
-        return [snake["id"] for snake in data["snakes"]]
+        return [snake['id'] for snake in data['snakes']['data']]
 
     def get_other_snake_ids(self, self_snake_id):
         """Return ids of other players"""
