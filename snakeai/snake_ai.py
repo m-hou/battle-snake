@@ -97,11 +97,12 @@ class SnakeAI():
             could_overlap_body = head_cell in other_body_cells
             return not could_overlap_body
 
-        return all(map(_could_snake_die_other_snakes_transition,
+        return board.cell_within_bounds(possible_head.head_cell) and (
+               all(map(_could_snake_die_other_snakes_transition,
                        [self._get_possible_snake_transitions(
                            other_snake_id, board)
                         for other_snake_id in
-                        self.game.get_other_snake_ids(snake_id)]))
+                        self.game.snake_ids])))
 
     def _get_possible_snake_transitions(self, snake_id, board):
         """Get possible cells that a snake can occupy on the next turn."""
