@@ -14,4 +14,6 @@ class TestSnakeAI(unittest.TestCase):
         curr_game = load_game('test_cases/diagonal_head2.json')
         heuristic = Heuristic()
         snake_ai = SnakeAI(curr_game, heuristic)
-        self.assertEqual(snake_ai.best_move(), Move.DOWN.get_move())
+        self.assertEqual(
+            snake_ai.get_candidate_moves(curr_game.you, curr_game.board),
+            [Move.LEFT, Move.DOWN])

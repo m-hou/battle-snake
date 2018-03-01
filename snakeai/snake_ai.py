@@ -95,14 +95,8 @@ class SnakeAI():
             (other_body_cells, other_possible_heads,
              other_snake) = possible_transition
             could_overlap_body = head_cell in other_body_cells
-            could_overlap_head = head_cell in [
-                other_head_cell.head_cell
-                for other_head_cell in other_possible_heads]
-            my_snake_longer = len(my_snake) > len(other_snake)
-            return not could_overlap_body and not (
-                could_overlap_head and not my_snake_longer)
+            return not could_overlap_body
 
-        my_snake = board.snakes[snake_id]
         return all(map(_could_snake_die_other_snakes_transition,
                        [self._get_possible_snake_transitions(
                            other_snake_id, board)
