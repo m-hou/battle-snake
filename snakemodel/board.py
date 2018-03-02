@@ -190,6 +190,7 @@ class Board:
         Decrement health, grow snakes, remove consumed food, respawn food.
         """
         for snake in self.get_snakes():
+            snake.prev_health = snake.health_points
             snake.health_points -= 1
 
         snake_consumed_cell_mapping = self._get_snake_consumed_cell_mapping()

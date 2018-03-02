@@ -75,7 +75,8 @@ class Heuristic():
 
         if snake.health_points == self.MAX_HEALTH:
             # this is required or else snake will never eat
-            return 1000
+            return 2 + (self.MAX_HEALTH - snake.prev_health) / (
+                self.MAX_HEALTH) * (board.width + board.height)
         else:
             return 2 + (self.MAX_HEALTH - snake.health_points) / (
                 self.MAX_HEALTH) * (board.width + board.height)
