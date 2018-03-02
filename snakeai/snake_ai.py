@@ -21,7 +21,7 @@ class SnakeAI():
         immediate move.
         """
         return self._best_move_helper(
-            self.game.you, self.game.board, self.heuristic.DEPTH)[0].get_move()
+            self.game.you, self.game.board, self.heuristic.depth)[0].get_move()
 
     def _best_move_helper(self, snake_id, board, depth):
         """
@@ -61,7 +61,8 @@ class SnakeAI():
         if depth <= 1:
             return board_eval
         other_snakes_best_move_mapping = \
-            {other_snake_id: self._best_move_helper(snake_id, board, 1).move
+            {other_snake_id: self._best_move_helper(
+                other_snake_id, board, depth - 1).move
              for other_snake_id in self.game.get_other_snake_ids(snake_id)}
         next_board = self.game.simulate_moves(
             board, other_snakes_best_move_mapping)
@@ -106,6 +107,8 @@ class SnakeAI():
 
     def _get_possible_snake_transitions(self, snake_id, board):
         """Get possible cells that a snake can occupy on the next turn."""
+        if snake_id in board.dead_snakes:
+            return [], [], board.dead_snakes[snake_id]
         snake = board.snakes[snake_id]
         body_cells = snake.body[:-1]
         PossibleHeads = namedtuple("PossibleHeads", "move, head_cell")

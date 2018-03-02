@@ -6,8 +6,10 @@ from .common import CANT_FIND
 
 class Heuristic():
 
+    def __init__(self, depth=1):
+        self.depth = depth
+
     DISCOUNT_FACTOR = 0.9
-    DEPTH = 1
     LARGE_PENALTY = np.array([-1000000000000, 0, 0])
     FOOD_SCORE = 100
     MAX_HEALTH = 100

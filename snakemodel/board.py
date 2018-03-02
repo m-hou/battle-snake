@@ -125,7 +125,8 @@ class Board:
     def _move_snakes(self, snake_id_move_mapping):
         """Apply moves to snakes."""
         for snake_id, move in snake_id_move_mapping.items():
-            self.snakes[snake_id].apply_move(move)
+            if snake_id in self.snakes.keys():
+                self.snakes[snake_id].apply_move(move)
 
     def _resolve_deaths(self):
         """
