@@ -1,4 +1,5 @@
 import heapq
+import sys
 from snakemodel.board import EntityId
 from snakemodel.snake import Move
 
@@ -28,7 +29,7 @@ def safe_square_count(board, cell):
     return count
 
 
-def get_travel_distance(board, start_cell, end_cell):
+def get_travel_distance(board, start_cell, end_cell, prune=sys.maxsize):
     """
     Get the distance between cells without traversing snake cells.
 
@@ -40,6 +41,8 @@ def get_travel_distance(board, start_cell, end_cell):
 
     while to_visit:
         distance, curr_cell = heapq.heappop(to_visit)
+        if cost_map[curr_cell] > prune:
+            return CANT_FIND
         if curr_cell == end_cell:
             return distance
         for move in Move:
