@@ -38,11 +38,24 @@ class Heuristic():
 
     def _get_tail_dist_penalty(self, snake, board):
         max_dist_to_tail = self._get_max_dist_from_tail(snake, board)
-        travel_distance = get_travel_distance(
-                board, snake.head, snake.body[-1])
-        tail_dist_penalty = -travel_distance if (
-            travel_distance == CANT_FIND) else (
-            min(0, max_dist_to_tail - travel_distance))
+
+        min_so_far = CANT_FIND
+        for target in board.get_snakes():
+            tail = target.body[-1]
+            my_dist = min_so_far
+            min_other_dist = CANT_FIND
+            for seeker in board.get_snakes():
+                if seeker == snake:
+                    my_dist = get_travel_distance(
+                        board, seeker.head, tail, my_dist)
+                else:
+                    min_other_dist = get_travel_distance(
+                        board, seeker.head, tail, min(min_other_dist, my_dist))
+            min_so_far = min(min_so_far, my_dist)
+
+        tail_dist_penalty = -min_so_far if (
+            min_so_far == CANT_FIND) else (
+            min(0, max_dist_to_tail - min_so_far))
         return tail_dist_penalty
 
     def _get_open_squares(self, board, snake):
