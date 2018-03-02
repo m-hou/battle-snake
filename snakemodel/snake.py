@@ -40,6 +40,9 @@ class Snake:
         self.body = [Cell(coord['x'], coord['y'])
                      for coord in coords['data']]
 
+    def tail(self):
+        return self.body[-1]
+
     def get_possible_moves(self):
         """
         Map of moves that the snake can make and the resulting head cells.

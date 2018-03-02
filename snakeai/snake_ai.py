@@ -1,6 +1,9 @@
 from collections import namedtuple
 import numpy as np
 
+MoveEvaluation = namedtuple("MoveEvaluation", "move, evaluation")
+PossibleHeads = namedtuple("PossibleHeads", "move, head_cell")
+
 
 class SnakeAI():
     """
@@ -21,7 +24,7 @@ class SnakeAI():
         immediate move.
         """
         return self._best_move_helper(
-            self.game.you, self.game.board, self.heuristic.depth)[0].get_move()
+            self.game.you, self.game.board, self.heuristic.depth).move.get_move()
 
     def _best_move_helper(self, snake_id, board, depth):
         """
@@ -31,7 +34,6 @@ class SnakeAI():
         given board, according to the heuristic, calculated to the given depth.
         Assume other snakes make the best immediate move.
         """
-        MoveEvaluation = namedtuple("MoveEvaluation", "move, evaluation")
         move_evals = [
             MoveEvaluation(
                 move=candidate_move,
@@ -43,9 +45,13 @@ class SnakeAI():
                     depth)
             )
             for candidate_move in self.get_candidate_moves(snake_id, board)]
-        return max(
+
+        x = np.array([move.evaluation for move in move_evals])
+        best_move = np.amax(x, axis=0)
+        best_move = max(
             move_evals,
-            key=lambda move_eval: tuple(move_eval.evaluation))
+            key=lambda x: np.array_equal(x.evaluation, best_move))
+        return best_move
 
     def _get_move_eval(self, snake_id, board, depth):
         """
@@ -58,28 +64,31 @@ class SnakeAI():
         board_eval = self.heuristic.heuristic(snake_id, board)
         if np.array_equal(board_eval, self.heuristic.LARGE_PENALTY):
             return self.heuristic.LARGE_PENALTY
+
         if depth <= 1:
             return board_eval
-        other_snakes_best_move_mapping = \
-            {other_snake_id: self._best_move_helper(
+
+        other_snakes_best_move_mapping = {
+            other_snake_id: self._best_move_helper(
                 other_snake_id, board, depth - 1).move
-             for other_snake_id in self.game.get_other_snake_ids(snake_id)}
+            for other_snake_id in self.game.get_other_snake_ids(snake_id)
+        }
         next_board = self.game.simulate_moves(
             board, other_snakes_best_move_mapping)
-        return board_eval + self.heuristic.DISCOUNT_FACTOR * \
-            self._best_move_helper(
-                self.game.you, next_board, depth - 1).evaluation
+
+        # Return the board_evaluation plus recursive steps
+        return board_eval + self.heuristic.DISCOUNT_FACTOR * (
+            self._best_move_helper(self.game.you,
+                                   next_board, depth - 1).evaluation)
 
     def get_candidate_moves(self, snake_id, board):
         """Moves that will not lead to immediate death from other snakes."""
         _, possible_heads, _ = self._get_possible_snake_transitions(
             self.game.you,
             board)
-        safe_transitions = filter(
-            lambda possible_head: self._is_possible_head_safe(
-                possible_head, snake_id, board),
-            possible_heads)
-        return [safe_transition.move for safe_transition in safe_transitions]
+
+        return [transition.move for transition in possible_heads
+                if self._is_possible_head_safe(transition, snake_id, board)]
 
     def _is_possible_head_safe(self, possible_head, snake_id, board):
         """
@@ -110,8 +119,8 @@ class SnakeAI():
         if snake_id in board.dead_snakes:
             return [], [], board.dead_snakes[snake_id]
         snake = board.snakes[snake_id]
+
         body_cells = snake.body[:-1]
-        PossibleHeads = namedtuple("PossibleHeads", "move, head_cell")
         possible_heads = [PossibleHeads(move=move,
                                         head_cell=head_cell)
                           for move, head_cell in

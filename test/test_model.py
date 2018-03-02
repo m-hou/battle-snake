@@ -1,6 +1,6 @@
 import unittest
 from snakemodel.snake import Move
-from test_util import load_game
+from .test_util import load_game
 
 
 class TestBoardTransition(unittest.TestCase):
