@@ -10,9 +10,10 @@ class Heuristic():
         self.depth = depth
 
     DISCOUNT_FACTOR = 0.9
-    LARGE_PENALTY = np.array([-1000000000000, 0, 0])
+    LARGE_PENALTY = np.array([-1000000000000, 0, 0, 0])
     FOOD_SCORE = 100
     MAX_HEALTH = 100
+    PENALTY = -5000
 
     def heuristic(self, snake_id, board):
         """
@@ -32,9 +33,18 @@ class Heuristic():
         snake = board.snakes[snake_id]
 
         return np.array(
-            [self._get_tail_dist_penalty(snake, board),
+            [self._in_larger_snake_range_penalty(snake, board),
+             self._get_tail_dist_penalty(snake, board),
              self._get_open_squares(board, snake),
              self._get_food_score(board, snake)])
+
+    def _in_larger_snake_range_penalty(self, snake, board):
+        for enemy in board.get_snakes():
+            if enemy is not snake and len(enemy) >= len(snake):
+                for _, enemy_head in enemy.get_possible_moves().items():
+                    if snake.head == enemy_head:
+                        return self.PENALTY
+        return 0
 
     def _get_tail_dist_penalty(self, snake, board):
         max_dist_to_tail = self._get_max_dist_from_tail(snake, board)

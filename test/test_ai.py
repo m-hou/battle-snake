@@ -36,3 +36,10 @@ class TestSnakeAI(unittest.TestCase):
             set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
             set([Move.LEFT, Move.RIGHT]))
         self.assertEqual(snake_ai.best_move(), Move.RIGHT.get_move())
+
+    def test_follow_tail(self):
+        """Follow tail of snake."""
+        curr_game = load_game('test_cases/follow_tail.json')
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(curr_game, heuristic)
+        self.assertEqual(snake_ai.best_move(), Move.DOWN.get_move())
