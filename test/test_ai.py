@@ -1,5 +1,4 @@
 import unittest
-from snakemodel.game import Game
 from snakemodel.snake import Move
 from snakeai.snake_ai import SnakeAI
 from snakeai.heuristic import Heuristic

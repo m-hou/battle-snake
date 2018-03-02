@@ -32,7 +32,8 @@ class Board:
 
     def _create_food(self, food_data):
         """Parse food from food_data."""
-        return set(Cell(food.get('x'), food.get('y')) for food in food_data.get('data'))
+        return set(Cell(food.get('x'), food.get('y'))
+                   for food in food_data.get('data'))
 
     def _create_snakes(self, snakes_data):
         """Parse snakes from snakes_data."""
