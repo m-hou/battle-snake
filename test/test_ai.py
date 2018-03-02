@@ -15,5 +15,5 @@ class TestSnakeAI(unittest.TestCase):
         heuristic = Heuristic()
         snake_ai = SnakeAI(curr_game, heuristic)
         self.assertEqual(
-            snake_ai.get_candidate_moves(curr_game.you, curr_game.board),
-            [Move.LEFT, Move.DOWN])
+            set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
+            set([Move.LEFT, Move.DOWN]))
