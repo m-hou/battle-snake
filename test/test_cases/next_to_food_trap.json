@@ -1,0 +1,524 @@
+{
+  "width": 13,
+  "height": 17,
+  "id": 6811,
+  "turn": 22,
+  "snakes": {
+    "data": [
+      {
+        "id": "3e08fbe0-dfd2-4d60-88dc-d3606ce835b5",
+        "health": 100,
+        "length": 11,
+        "taunt": "",
+        "name": "1 snakey boi",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 9,
+              "y": 16
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 15
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 14
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 13
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 13
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 13
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 13
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 14
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 15
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 16
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 16
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "0fb1f2bf-4d87-4d47-b4b9-33576923abd0",
+        "health": 96,
+        "length": 13,
+        "taunt": "\"(12, 10)\"",
+        "name": "tomb-snake-v5",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 11,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 10,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 6
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "73971499-f437-4b55-adfb-ffe9e467abb2",
+        "health": 100,
+        "length": 9,
+        "taunt": "\"Nobody likes snakes. Even snakes dont like snakes\"",
+        "name": "Viridian City Snake",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 8,
+              "y": 3
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 2
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "49bd6da9-1970-41b1-8d99-c32c484b943b",
+        "health": 94,
+        "length": 10,
+        "taunt": "\"Boy, it's lucky you have these compartments!\"",
+        "name": "snek v4",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 1,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 0,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 0,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 0,
+              "y": 5
+            },
+            {
+              "object": "point",
+              "x": 0,
+              "y": 4
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 4
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 5
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "e7831373-e094-4d5c-bcac-2f15e9f270cd",
+        "health": 96,
+        "length": 11,
+        "taunt": "\"Moving left, targeting Food\"",
+        "name": "Heroku Slashterix",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 5,
+              "y": 12
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 12
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 11
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 11
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 11
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 11
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 11
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 10
+            }
+          ],
+          "object": "list"
+        }
+      }
+    ],
+    "object": "list"
+  },
+  "food": {
+    "data": [
+      {
+        "object": "point",
+        "x": 12,
+        "y": 11
+      },
+      {
+        "object": "point",
+        "x": 1,
+        "y": 16
+      },
+      {
+        "object": "point",
+        "x": 12,
+        "y": 10
+      },
+      {
+        "object": "point",
+        "x": 10,
+        "y": 16
+      },
+      {
+        "object": "point",
+        "x": 12,
+        "y": 16
+      },
+      {
+        "object": "point",
+        "x": 12,
+        "y": 8
+      },
+      {
+        "object": "point",
+        "x": 12,
+        "y": 2
+      },
+      {
+        "object": "point",
+        "x": 9,
+        "y": 4
+      },
+      {
+        "object": "point",
+        "x": 4,
+        "y": 16
+      },
+      {
+        "object": "point",
+        "x": 3,
+        "y": 14
+      },
+      {
+        "object": "point",
+        "x": 12,
+        "y": 9
+      },
+      {
+        "object": "point",
+        "x": 0,
+        "y": 15
+      },
+      {
+        "object": "point",
+        "x": 7,
+        "y": 5
+      },
+      {
+        "object": "point",
+        "x": 12,
+        "y": 5
+      },
+      {
+        "object": "point",
+        "x": 10,
+        "y": 2
+      },
+      {
+        "object": "point",
+        "x": 3,
+        "y": 12
+      },
+      {
+        "object": "point",
+        "x": 12,
+        "y": 13
+      },
+      {
+        "object": "point",
+        "x": 12,
+        "y": 7
+      },
+      {
+        "object": "point",
+        "x": 2,
+        "y": 0
+      },
+      {
+        "object": "point",
+        "x": 3,
+        "y": 15
+      }
+    ],
+    "object": "list"
+  },
+  "object": "world",
+  "dead_snakes": {
+    "data": [],
+    "object": "list"
+  },
+  "you": {
+    "id": "3e08fbe0-dfd2-4d60-88dc-d3606ce835b5",
+    "health": 100,
+    "length": 11,
+    "taunt": "",
+    "name": "1 snakey boi",
+    "object": "snake",
+    "body": {
+      "data": [
+        {
+          "object": "point",
+          "x": 9,
+          "y": 16
+        },
+        {
+          "object": "point",
+          "x": 9,
+          "y": 15
+        },
+        {
+          "object": "point",
+          "x": 9,
+          "y": 14
+        },
+        {
+          "object": "point",
+          "x": 9,
+          "y": 13
+        },
+        {
+          "object": "point",
+          "x": 8,
+          "y": 13
+        },
+        {
+          "object": "point",
+          "x": 7,
+          "y": 13
+        },
+        {
+          "object": "point",
+          "x": 6,
+          "y": 13
+        },
+        {
+          "object": "point",
+          "x": 6,
+          "y": 14
+        },
+        {
+          "object": "point",
+          "x": 6,
+          "y": 15
+        },
+        {
+          "object": "point",
+          "x": 6,
+          "y": 16
+        },
+        {
+          "object": "point",
+          "x": 6,
+          "y": 16
+        }
+      ],
+      "object": "list"
+    }
+  }
+}
