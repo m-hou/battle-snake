@@ -17,12 +17,22 @@ class TestSnakeAI(unittest.TestCase):
             set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
             set([Move.LEFT, Move.DOWN]))
 
-    def test_best_move(self):
-        """Test scenario where a larger snake is diagonally adjacent."""
-        curr_game = load_game('test_cases/a.json')
-        heuristic = Heuristic(1)
+    def test_food_trap(self):
+        """Test scenario where adjacent food is a trap."""
+        curr_game = load_game('test_cases/next_to_food_trap.json')
+        heuristic = Heuristic()
         snake_ai = SnakeAI(curr_game, heuristic)
         self.assertEqual(
             set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
             set([Move.LEFT, Move.RIGHT]))
         self.assertEqual(snake_ai.best_move(), Move.LEFT.get_move())
+
+    def test_go_for_further_tail(self):
+        """Another snake is closer to the closest tail for snake."""
+        curr_game = load_game('test_cases/go_for_further_tail.json')
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(curr_game, heuristic)
+        self.assertEqual(
+            set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
+            set([Move.LEFT, Move.RIGHT]))
+        self.assertEqual(snake_ai.best_move(), Move.RIGHT.get_move())

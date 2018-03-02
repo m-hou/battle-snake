@@ -42,16 +42,20 @@ class Heuristic():
         min_so_far = CANT_FIND
         for target in board.get_snakes():
             tail = target.body[-1]
-            my_dist = min_so_far
+            min_my_dist = min_so_far
             min_other_dist = CANT_FIND
             for seeker in board.get_snakes():
                 if seeker == snake:
-                    my_dist = get_travel_distance(
-                        board, seeker.head, tail, my_dist)
+                    min_my_dist = get_travel_distance(
+                        board, seeker.head, tail, min_my_dist)
                 else:
                     min_other_dist = get_travel_distance(
-                        board, seeker.head, tail, min(min_other_dist, my_dist))
-            min_so_far = min(min_so_far, my_dist)
+                        board,
+                        seeker.head,
+                        tail,
+                        min(min_other_dist, min_my_dist))
+            if (min_other_dist > min_my_dist):
+                min_so_far = min(min_so_far, min_my_dist)
 
         tail_dist_penalty = -min_so_far if (
             min_so_far == CANT_FIND) else (
