@@ -1,0 +1,240 @@
+{
+  "width": 17,
+  "height": 19,
+  "id": 94,
+  "turn": 11,
+  "snakes": {
+    "data": [
+      {
+        "id": "90a3ded9-5e45-4b9e-9575-ed81cd70d522",
+        "health": 89,
+        "length": 3,
+        "taunt": "TIMED OUT",
+        "name": "test",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 12,
+              "y": 1
+            },
+            {
+              "object": "point",
+              "x": 12,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 12,
+              "y": 3
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "c43435fe-bbc9-47c4-bb85-2184ac5a585d",
+        "health": 89,
+        "length": 3,
+        "taunt": "",
+        "name": "test snake please ignore",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 5,
+              "y": 14
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 15
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 16
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "c5a3f28d-df27-4bc0-9727-1a8a805a141d",
+        "health": 89,
+        "length": 3,
+        "taunt": "",
+        "name": "sad snacke",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 1,
+              "y": 14
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 13
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 12
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "1fc1c054-a38e-454a-9a96-79b5e2c43836",
+        "health": 97,
+        "length": 5,
+        "taunt": "\"hello\"",
+        "name": "Training Snake 10",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 15,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 15,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 15,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 15,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 15,
+              "y": 10
+            }
+          ],
+          "object": "list"
+        }
+      }
+    ],
+    "object": "list"
+  },
+  "food": {
+    "data": [
+      {
+        "object": "point",
+        "x": 2,
+        "y": 8
+      },
+      {
+        "object": "point",
+        "x": 14,
+        "y": 17
+      },
+      {
+        "object": "point",
+        "x": 8,
+        "y": 13
+      },
+      {
+        "object": "point",
+        "x": 9,
+        "y": 16
+      },
+      {
+        "object": "point",
+        "x": 10,
+        "y": 13
+      },
+      {
+        "object": "point",
+        "x": 7,
+        "y": 15
+      },
+      {
+        "object": "point",
+        "x": 1,
+        "y": 6
+      },
+      {
+        "object": "point",
+        "x": 7,
+        "y": 17
+      }
+    ],
+    "object": "list"
+  },
+  "object": "world",
+  "dead_snakes": {
+    "data": [
+      {
+        "id": "4826a2ca-46cc-49c0-86fe-1d9cd7147626",
+        "health": 92,
+        "length": 3,
+        "taunt": "\"Outta my way, snake!\"",
+        "name": "Snake1",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 17,
+              "y": 1
+            },
+            {
+              "object": "point",
+              "x": 16,
+              "y": 1
+            },
+            {
+              "object": "point",
+              "x": 15,
+              "y": 1
+            }
+          ],
+          "object": "list"
+        }
+      }
+    ],
+    "object": "list"
+  },
+  "you": {
+    "id": "c5a3f28d-df27-4bc0-9727-1a8a805a141d",
+    "health": 89,
+    "length": 3,
+    "taunt": "",
+    "name": "sad snacke",
+    "object": "snake",
+    "body": {
+      "data": [
+        {
+          "object": "point",
+          "x": 1,
+          "y": 14
+        },
+        {
+          "object": "point",
+          "x": 1,
+          "y": 13
+        },
+        {
+          "object": "point",
+          "x": 1,
+          "y": 12
+        }
+      ],
+      "object": "list"
+    }
+  }
+}

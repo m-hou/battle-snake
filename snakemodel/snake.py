@@ -35,6 +35,7 @@ class Snake:
         self.name = snake_data['name']
         self.id = snake_data['id']
         self.health_points = snake_data['health']
+        self.prev_health = self.health_points
         coords = snake_data['body']
         self.head = Cell(coords['data'][0]['x'], coords['data'][0]['y'])
         self.body = [Cell(coord['x'], coord['y'])
@@ -76,7 +77,9 @@ class Snake:
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
-            return self.__dict__ == other.__dict__
+            return self.health_points == other.health_points and (
+                self.id == other.id and self.head == other.head) and (
+                self.body == other.body)
 
     def __hash__(self):
         return hash((self.name, self.id, self.health_points,

@@ -1,0 +1,267 @@
+{
+  "width": 17,
+  "height": 13,
+  "id": 7178,
+  "turn": 6,
+  "snakes": {
+    "data": [
+      {
+        "id": "f8fa5342-950d-4ab7-9341-2ec14e8afc90",
+        "health": 94,
+        "length": 3,
+        "taunt": "TIMED OUT",
+        "name": "danger-noodle",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 5,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 3
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 4
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "f0bbf4dc-c1d6-4fa0-a0ca-ed6cae0d886f",
+        "health": 94,
+        "length": 3,
+        "taunt": "TIMED OUT",
+        "name": "bensnake",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 10,
+              "y": 5
+            },
+            {
+              "object": "point",
+              "x": 10,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 10,
+              "y": 7
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "582f8749-71b1-4a47-ac54-ba29426326e6",
+        "health": 94,
+        "length": 3,
+        "taunt": "\"https://www.youtube.com/watch?v=oYnZkmJ1Ymo\"",
+        "name": "lw-test",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 7,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 1
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 0
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "c43435fe-bbc9-47c4-bb85-2184ac5a585d",
+        "health": 94,
+        "length": 3,
+        "taunt": "TIMED OUT",
+        "name": "test snake please ignore",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 5,
+              "y": 0
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 0
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 1
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "2a702ab9-569b-431e-b22c-62b59707ea04",
+        "health": 94,
+        "length": 3,
+        "taunt": "\"Y\"",
+        "name": "loling",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 15,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 15,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 14,
+              "y": 9
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "64f03f9f-c332-4330-8a1e-8342c8d887c7",
+        "health": 94,
+        "length": 3,
+        "taunt": "\"Boop the snoot!\"",
+        "name": "LUL",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 2,
+              "y": 3
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 3
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 2
+            }
+          ],
+          "object": "list"
+        }
+      }
+    ],
+    "object": "list"
+  },
+  "food": {
+    "data": [
+      {
+        "object": "point",
+        "x": 14,
+        "y": 3
+      },
+      {
+        "object": "point",
+        "x": 2,
+        "y": 6
+      },
+      {
+        "object": "point",
+        "x": 11,
+        "y": 3
+      },
+      {
+        "object": "point",
+        "x": 16,
+        "y": 8
+      },
+      {
+        "object": "point",
+        "x": 4,
+        "y": 11
+      },
+      {
+        "object": "point",
+        "x": 11,
+        "y": 2
+      },
+      {
+        "object": "point",
+        "x": 1,
+        "y": 1
+      },
+      {
+        "object": "point",
+        "x": 1,
+        "y": 4
+      },
+      {
+        "object": "point",
+        "x": 16,
+        "y": 6
+      },
+      {
+        "object": "point",
+        "x": 5,
+        "y": 11
+      }
+    ],
+    "object": "list"
+  },
+  "object": "world",
+  "dead_snakes": {
+    "data": [],
+    "object": "list"
+  },
+  "you": {
+    "id": "c43435fe-bbc9-47c4-bb85-2184ac5a585d",
+    "health": 94,
+    "length": 3,
+    "taunt": "TIMED OUT",
+    "name": "test snake please ignore",
+    "object": "snake",
+    "body": {
+      "data": [
+        {
+          "object": "point",
+          "x": 5,
+          "y": 0
+        },
+        {
+          "object": "point",
+          "x": 6,
+          "y": 0
+        },
+        {
+          "object": "point",
+          "x": 6,
+          "y": 1
+        }
+      ],
+      "object": "list"
+    }
+  }
+}

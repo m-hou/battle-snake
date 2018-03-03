@@ -28,7 +28,7 @@ def move():
     data = json.loads(request.data.decode("utf-8"))
     # try:
     game = Game(data)
-    heuristic = Heuristic(1)
+    heuristic = Heuristic(2)
     snake_ai = SnakeAI(game, heuristic)
     best_move = snake_ai.best_move()
 

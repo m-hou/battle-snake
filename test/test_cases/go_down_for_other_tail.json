@@ -1,0 +1,453 @@
+{
+  "width": 10,
+  "height": 18,
+  "id": 1047,
+  "turn": 72,
+  "snakes": {
+    "data": [
+      {
+        "id": "ff7a9a84-ba30-41e2-b945-8c33a45ff6ad",
+        "health": 100,
+        "length": 21,
+        "taunt": "\"Mans gotta eat!\"",
+        "name": "charliejar",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 6,
+              "y": 4
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 5
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 5
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 5
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 5
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 5
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 5
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 11
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 12
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 13
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 14
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 15
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 16
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 16
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "312f236b-4b70-4aa4-ae7e-c8df03ba14e5",
+        "health": 91,
+        "length": 9,
+        "taunt": "",
+        "name": "lmao",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 0,
+              "y": 4
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 4
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 4
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 3
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 3
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 3
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 2
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 3
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "49bd6da9-1970-41b1-8d99-c32c484b943b",
+        "health": 100,
+        "length": 25,
+        "taunt": "\"Travelling through hyperspace ain't like dustin' crops, boy!\"",
+        "name": "snek v4",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 9,
+              "y": 5
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 8,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 6,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 2,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 3,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 5,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 11
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 12
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 13
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 13
+            }
+          ],
+          "object": "list"
+        }
+      }
+    ],
+    "object": "list"
+  },
+  "food": {
+    "data": [
+      {
+        "object": "point",
+        "x": 9,
+        "y": 9
+      },
+      {
+        "object": "point",
+        "x": 2,
+        "y": 0
+      },
+      {
+        "object": "point",
+        "x": 9,
+        "y": 11
+      },
+      {
+        "object": "point",
+        "x": 6,
+        "y": 1
+      },
+      {
+        "object": "point",
+        "x": 8,
+        "y": 0
+      },
+      {
+        "object": "point",
+        "x": 6,
+        "y": 2
+      },
+      {
+        "object": "point",
+        "x": 6,
+        "y": 9
+      },
+      {
+        "object": "point",
+        "x": 6,
+        "y": 0
+      },
+      {
+        "object": "point",
+        "x": 6,
+        "y": 8
+      },
+      {
+        "object": "point",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "object": "point",
+        "x": 0,
+        "y": 11
+      },
+      {
+        "object": "point",
+        "x": 7,
+        "y": 4
+      }
+    ],
+    "object": "list"
+  },
+  "object": "world",
+  "dead_snakes": {
+    "data": [],
+    "object": "list"
+  },
+  "you": {
+    "id": "312f236b-4b70-4aa4-ae7e-c8df03ba14e5",
+    "health": 91,
+    "length": 9,
+    "taunt": "",
+    "name": "lmao",
+    "object": "snake",
+    "body": {
+      "data": [
+        {
+          "object": "point",
+          "x": 0,
+          "y": 4
+        },
+        {
+          "object": "point",
+          "x": 1,
+          "y": 4
+        },
+        {
+          "object": "point",
+          "x": 2,
+          "y": 4
+        },
+        {
+          "object": "point",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "object": "point",
+          "x": 3,
+          "y": 3
+        },
+        {
+          "object": "point",
+          "x": 4,
+          "y": 3
+        },
+        {
+          "object": "point",
+          "x": 4,
+          "y": 2
+        },
+        {
+          "object": "point",
+          "x": 5,
+          "y": 2
+        },
+        {
+          "object": "point",
+          "x": 5,
+          "y": 3
+        }
+      ],
+      "object": "list"
+    }
+  }
+}

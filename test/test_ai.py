@@ -17,7 +17,6 @@ class TestSnakeAI(unittest.TestCase):
             set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
             set([Move.LEFT, Move.DOWN]))
 
-
     def test_trap(self):
         game = load_game('test_cases/psuedo_trap.json')
         h = Heuristic(2)
@@ -25,7 +24,6 @@ class TestSnakeAI(unittest.TestCase):
         moves = snake.best_move()
         # candidate = snake.get_candidate_moves(game.you, game.board)
         self.assertEqual(moves, 'right')
-
 
     def test_collision(self):
         game = load_game('test_cases/collision.json')
@@ -44,3 +42,47 @@ class TestSnakeAI(unittest.TestCase):
         candidate = snake.get_candidate_moves(game.you, game.board)
         print("candidates are here",  candidate)
         print(moves)
+
+    def test_food_trap(self):
+        """Test scenario where adjacent food is a trap."""
+        curr_game = load_game('test_cases/next_to_food_trap.json')
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(curr_game, heuristic)
+        # self.assertEqual(
+        #     set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
+        #     set([Move.LEFT, Move.RIGHT]))
+        self.assertEqual(snake_ai.best_move(), Move.DOWN.get_move())
+
+    def test_go_for_further_tail(self):
+        """Another snake is closer to the closest tail for snake."""
+        curr_game = load_game('test_cases/go_for_further_tail.json')
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(curr_game, heuristic)
+        self.assertEqual(
+            set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
+            set([Move.LEFT, Move.RIGHT]))
+        self.assertEqual(snake_ai.best_move(), Move.RIGHT.get_move())
+
+    def test_follow_tail(self):
+        """Follow tail of snake."""
+        curr_game = load_game('test_cases/follow_tail.json')
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(curr_game, heuristic)
+        self.assertEqual(snake_ai.best_move(), Move.DOWN.get_move())
+
+    def test_go_down_for_other_tail(self):
+        """Follow tail of snake."""
+        curr_game = load_game('test_cases/go_down_for_other_tail.json')
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(curr_game, heuristic)
+        self.assertEqual(
+            set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
+            set([Move.UP, Move.DOWN]))
+        self.assertEqual(snake_ai.best_move(), Move.DOWN.get_move())
+
+    def test_next_to_same_size_snake(self):
+        """Going left will potentially crash into same size snake"""
+        curr_game = load_game('test_cases/next_to_same_size_snake.json')
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(curr_game, heuristic)
+        self.assertNotEquals(snake_ai.best_move(), Move.LEFT)

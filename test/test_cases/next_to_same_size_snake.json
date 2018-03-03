@@ -1,0 +1,244 @@
+{
+  "width": 10,
+  "height": 11,
+  "id": 2823,
+  "turn": 1,
+  "snakes": {
+    "data": [
+      {
+        "id": "3735d7cb-4de7-4db2-a96a-81f8329dd9b3",
+        "health": 99,
+        "length": 3,
+        "taunt": "",
+        "name": ":D",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 6,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 7,
+              "y": 6
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "49bd6da9-1970-41b1-8d99-c32c484b943b",
+        "health": 99,
+        "length": 3,
+        "taunt": "\"Strike me down, and I will become more powerful than you could possibly imagine.\"",
+        "name": "snek v4",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 9,
+              "y": 9
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 10
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "312f236b-4b70-4aa4-ae7e-c8df03ba14e5",
+        "health": 99,
+        "length": 3,
+        "taunt": "",
+        "name": "lmao",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 4,
+              "y": 6
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 4,
+              "y": 7
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "6292dac4-a4b6-4a5b-b195-b35224d825a8",
+        "health": 100,
+        "length": 4,
+        "taunt": "\"(0, 10) 0\"",
+        "name": "my-nem-is-snek",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 0,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 10
+            },
+            {
+              "object": "point",
+              "x": 1,
+              "y": 10
+            }
+          ],
+          "object": "list"
+        }
+      },
+      {
+        "id": "e5c6a37d-6b89-4339-8ced-0b723f35b5e2",
+        "health": 99,
+        "length": 3,
+        "taunt": "\"yo im a snake\"",
+        "name": "DANGER NOODLE",
+        "object": "snake",
+        "body": {
+          "data": [
+            {
+              "object": "point",
+              "x": 9,
+              "y": 7
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 8
+            },
+            {
+              "object": "point",
+              "x": 9,
+              "y": 8
+            }
+          ],
+          "object": "list"
+        }
+      }
+    ],
+    "object": "list"
+  },
+  "food": {
+    "data": [
+      {
+        "object": "point",
+        "x": 6,
+        "y": 1
+      },
+      {
+        "object": "point",
+        "x": 2,
+        "y": 1
+      },
+      {
+        "object": "point",
+        "x": 0,
+        "y": 8
+      },
+      {
+        "object": "point",
+        "x": 5,
+        "y": 9
+      },
+      {
+        "object": "point",
+        "x": 5,
+        "y": 0
+      },
+      {
+        "object": "point",
+        "x": 5,
+        "y": 4
+      },
+      {
+        "object": "point",
+        "x": 5,
+        "y": 6
+      },
+      {
+        "object": "point",
+        "x": 9,
+        "y": 4
+      },
+      {
+        "object": "point",
+        "x": 3,
+        "y": 3
+      },
+      {
+        "object": "point",
+        "x": 0,
+        "y": 5
+      }
+    ],
+    "object": "list"
+  },
+  "object": "world",
+  "dead_snakes": {
+    "data": [],
+    "object": "list"
+  },
+  "you": {
+    "id": "3735d7cb-4de7-4db2-a96a-81f8329dd9b3",
+    "health": 99,
+    "length": 3,
+    "taunt": "",
+    "name": ":D",
+    "object": "snake",
+    "body": {
+      "data": [
+        {
+          "object": "point",
+          "x": 6,
+          "y": 6
+        },
+        {
+          "object": "point",
+          "x": 7,
+          "y": 6
+        },
+        {
+          "object": "point",
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "object": "list"
+    }
+  }
+}

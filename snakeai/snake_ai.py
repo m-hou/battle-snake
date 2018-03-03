@@ -45,13 +45,16 @@ class SnakeAI():
                     depth)
             )
             for candidate_move in self.get_candidate_moves(snake_id, board)]
+        # print("evals:", [(move.move, move.evaluation) for move in move_evals])
+        return max(move_evals,
+            key=lambda move_eval: tuple(move_eval.evaluation))
 
-        x = np.array([move.evaluation for move in move_evals])
-        best_move = np.amax(x, axis=0)
-        best_move = max(
-            move_evals,
-            key=lambda x: np.array_equal(x.evaluation, best_move))
-        return best_move
+        # x = np.array([move.evaluation for move in move_evals])
+        # best_move = np.amax(x, axis=0)
+        # best_move = max(
+        #     move_evals,
+        #     key=lambda x: np.array_equal(x.evaluation, best_move))
+        # return best_move
 
     def _get_move_eval(self, snake_id, board, depth):
         """
@@ -102,8 +105,7 @@ class SnakeAI():
         def _could_snake_die_other_snakes_transition(possible_transition):
             """Could snake die from any transition of another snake."""
             head_cell = possible_head.head_cell
-            (other_body_cells, other_possible_heads,
-             other_snake) = possible_transition
+            other_body_cells, _, _ = possible_transition
             could_overlap_body = head_cell in other_body_cells
             return not could_overlap_body
 

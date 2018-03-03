@@ -12,9 +12,12 @@ class Heuristic():
         self.depth = depth
 
     DISCOUNT_FACTOR = 0.9
-    LARGE_PENALTY = np.array([-1000, 0, 0, 0, 0])
+    LARGE_PENALTY = np.array([-1000, 0, 0, 0])
+
+    # LARGE_PENALTY = np.array([-1000000000000, 0, 0, 0])
     FOOD_SCORE = 100
     MAX_HEALTH = 100
+    PENALTY = -5000
 
     def heuristic(self, snake_id, board):
         """
@@ -32,13 +35,21 @@ class Heuristic():
 
         snake = board.snakes[snake_id]
 
-        return np.array([
-             self._get_tail_dist_penalty(snake, board),
-             self._get_open_squares(board, snake),
-             self._get_food_score(board, snake),
-             # self.scarey_snake_heads(snake, board),
-             # self.closest_to_most(snake, board),
+        scores = np.array([
+            self._in_larger_snake_range_penalty(snake, board),
+            self._get_tail_dist_penalty(snake, board),
+            self._get_open_squares(board, snake),
         ])
+        food_scores = np.array([
+            self._get_food_score(board, snake),
+            self.closest_to_most(snake, board)
+        ])
+        food_scores = food_scores if snake.health_points < 30 else food_scores[::-1]
+
+
+        # self.scarey_snake_heads(snake, board),
+        scores = np.concatenate((scores, food_scores))
+        return scores
 
     def closest_to_most(self, snake, board):
         close = 0
@@ -62,16 +73,38 @@ class Heuristic():
             distances += snake.head.distance(osnake.head)
         return distances
 
+    def _in_larger_snake_range_penalty(self, snake, board):
+        """Penalty if in the range (next move) of a larger snake."""
+        for enemy in board.get_snakes():
+            if enemy is not snake and len(enemy) >= len(snake):
+                for _, enemy_head in enemy.get_possible_moves().items():
+                    if snake.head == enemy_head:
+                        return self.PENALTY
+        return 0
+
     def _get_tail_dist_penalty(self, snake, board):
-        max_dist_to_tail = self._get_max_dist_from_tail(snake, board)
-        travel_distance = get_travel_distance(
-                board, snake.head, snake.body[-1])
-        tail_dist_penalty = -travel_distance if (
-            travel_distance == CANT_FIND) else (
-            min(0, max_dist_to_tail - travel_distance))
+        """Penalty for being too far away from a tail."""
+
+        allowable_tail_dist = self._allowable_tail_dist(snake, board)
+
+        min_so_far = CANT_FIND
+        # make the targets the heads instead of the tails so that we
+        # can take advanatage of multi-target a-star
+        targets = [target.head for target in board.get_snakes()]
+        for seeker in board.get_snakes():
+            min_dist, head = get_travel_distance(
+                board, seeker.body[-1], targets, min_so_far)
+            if head == snake.head:
+                min_so_far = min_dist
+
+        tail_dist_penalty = -min_so_far if (
+            min_so_far == CANT_FIND) else (
+            min(0, allowable_tail_dist - min_so_far))
         return tail_dist_penalty
 
     def _get_open_squares(self, board, snake):
+        """Total number of reachable squares."""
+
         reachable_squares = safe_square_count(board, snake.head)
         squares_occupied = len(snake.body)
         if snake.head.distance(snake.body[-1]):
@@ -79,19 +112,29 @@ class Heuristic():
         return reachable_squares
 
     def _get_food_score(self, board, snake):
-        food_evaluation = CANT_FIND
-        for food in board.food:
-            food_evaluation = min(food_evaluation, food.distance(snake.head))
+        """Incentive to approach closest food."""
+
+        food_evaluation, _ = get_travel_distance(board, snake.head, board.food)
         length_score = len(snake.body) * self.FOOD_SCORE
         travel_distance = snake.head.distance(snake.body[-1])
         return -food_evaluation + length_score - 100 * (travel_distance == 1)
 
-    def _get_max_dist_from_tail(self, snake, board):
+    def _allowable_tail_dist(self, snake, board):
         """Threshold where there is no penalty for being too far from tail."""
 
         if snake.health_points == self.MAX_HEALTH:
             # this is required or else snake will never eat
-            return 1000
+            return 2 + (self.MAX_HEALTH - snake.prev_health) / (
+                self.MAX_HEALTH) * (board.width + board.height) * 2
         else:
             return 2 + (self.MAX_HEALTH - snake.health_points) / (
-                self.MAX_HEALTH) * (board.width + board.height)
+                self.MAX_HEALTH) * (board.width + board.height) * 2
+
+    def _scary_snake_head_penalty(self, my_snake, board):
+        """Avoid snake heads that are larger."""
+        scary_snake_heads = [snake.head for snake in board.get_snakes()
+                             if snake != my_snake and
+                             len(snake) >= len(my_snake)]
+        closest_dist, _ = get_travel_distance(
+            board, my_snake.head, scary_snake_heads)
+        return closest_dist * self.FOOD_SCORE / 3
