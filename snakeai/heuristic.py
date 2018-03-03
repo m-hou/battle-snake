@@ -87,10 +87,10 @@ class Heuristic():
         if snake.health_points == self.MAX_HEALTH:
             # this is required or else snake will never eat
             return 2 + (self.MAX_HEALTH - snake.prev_health) / (
-                self.MAX_HEALTH) * (board.width + board.height)
+                self.MAX_HEALTH) * (board.width + board.height) * 2
         else:
             return 2 + (self.MAX_HEALTH - snake.health_points) / (
-                self.MAX_HEALTH) * (board.width + board.height)
+                self.MAX_HEALTH) * (board.width + board.height) * 2
 
     def _scary_snake_head_penalty(self, my_snake, board):
         """Avoid snake heads that are larger."""
