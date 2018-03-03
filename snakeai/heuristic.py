@@ -36,7 +36,7 @@ class Heuristic():
         return np.array(
             [self._in_larger_snake_range_penalty(snake, board),
              self._get_tail_dist_penalty(snake, board),
-             self._get_open_squares(snake, board),
+             self._get_open_squares(board, snake),
              self._get_food_score(board, snake)])
 
     def _in_larger_snake_range_penalty(self, snake, board):
@@ -60,7 +60,7 @@ class Heuristic():
         for seeker in board.get_snakes():
             min_dist, head = get_travel_distance(
                 board,
-                seeker.body[-len(snake.body) / 2 + 1],
+                seeker.body[-len(snake.body) // 2 + 1],
                 targets,
                 min_so_far)
             if head == snake.head:
@@ -90,11 +90,11 @@ class Heuristic():
 
         if snake.health_points == self.MAX_HEALTH:
             # this is required or else snake will never eat
-            return 2 + (self.MAX_HEALTH - (snake.prev_health - 1)) / (
-                self.MAX_HEALTH) * (board.width + board.height) * 2
+            return 2 + ((self.MAX_HEALTH - (snake.prev_health - 1)) / (
+                self.MAX_HEALTH)) ** 2 * (board.width + board.height) * 4
         else:
-            return 2 + (self.MAX_HEALTH - snake.health_points) / (
-                self.MAX_HEALTH) * (board.width + board.height) * 2
+            return 2 + ((self.MAX_HEALTH - snake.health_points) / (
+                self.MAX_HEALTH)) ** 2 * (board.width + board.height) * 4
 
     def _scary_snake_head_penalty(self, my_snake, board):
         """Avoid snake heads that are larger."""
