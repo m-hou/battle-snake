@@ -36,7 +36,7 @@ class Heuristic():
         return np.array(
             [self._in_larger_snake_range_penalty(snake, board),
              self._get_tail_dist_penalty(snake, board),
-             voronoi(snake, board),
+             self._get_open_squares(snake, board),
              self._get_food_score(board, snake)])
 
     def _in_larger_snake_range_penalty(self, snake, board):
@@ -59,7 +59,10 @@ class Heuristic():
         targets = [target.head for target in board.get_snakes()]
         for seeker in board.get_snakes():
             min_dist, head = get_travel_distance(
-                board, seeker.body[-1], targets, min_so_far)
+                board,
+                seeker.body[-len(snake.body) / 2 + 1],
+                targets,
+                min_so_far)
             if head == snake.head:
                 min_so_far = min_dist
 
@@ -87,7 +90,7 @@ class Heuristic():
 
         if snake.health_points == self.MAX_HEALTH:
             # this is required or else snake will never eat
-            return 2 + (self.MAX_HEALTH - snake.prev_health) / (
+            return 2 + (self.MAX_HEALTH - (snake.prev_health - 1)) / (
                 self.MAX_HEALTH) * (board.width + board.height) * 2
         else:
             return 2 + (self.MAX_HEALTH - snake.health_points) / (
