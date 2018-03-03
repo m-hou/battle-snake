@@ -3,6 +3,8 @@ from .common import safe_square_count
 from .common import get_travel_distance
 from .common import voronoi
 from .common import CANT_FIND
+from snakemodel.board import EntityId
+from snakemodel.cell import Cell
 
 
 class Heuristic():
@@ -33,11 +35,17 @@ class Heuristic():
 
         snake = board.snakes[snake_id]
 
-        return np.array(
+        scores = np.array(
             [self._in_larger_snake_range_penalty(snake, board),
              self._get_tail_dist_penalty(snake, board),
-             self._get_open_squares(board, snake),
-             self._get_food_score(board, snake)])
+             self._get_open_squares(board, snake)])
+        food_scores = np.array([
+            self._get_food_score(board, snake),
+            self.closest_to_most(snake, board)
+        ])
+        food_scores = food_scores if (
+            snake.health_points < 30) else food_scores[::-1]
+        return np.concatenate((scores, food_scores))
 
     def _in_larger_snake_range_penalty(self, snake, board):
         """Penalty if in the range (next move) of a larger snake."""
@@ -104,3 +112,17 @@ class Heuristic():
         closest_dist, _ = get_travel_distance(
             board, my_snake.head, scary_snake_heads)
         return closest_dist * self.FOOD_SCORE / 3
+
+    def closest_to_most(self, snake, board):
+        close = 0
+        empty_row = [(cell, x, y) for y, row in enumerate(board.board)
+                     for x, cell in enumerate(row)
+                     if cell == EntityId.EMPTY]
+
+        for (cell, x, y) in empty_row:
+            if cell == EntityId.EMPTY:
+                closest = min(board.snakes.values(),
+                              key=lambda a_snake: a_snake.head.distance(
+                                  Cell(x, y)))
+                close += closest.id == snake.id
+        return close / (len(empty_row) + 1)
