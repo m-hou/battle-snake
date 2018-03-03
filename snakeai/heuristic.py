@@ -1,6 +1,7 @@
 import numpy as np
 from .common import safe_square_count
 from .common import get_travel_distance
+from .common import voronoi
 from .common import CANT_FIND
 
 
@@ -35,7 +36,7 @@ class Heuristic():
         return np.array(
             [self._in_larger_snake_range_penalty(snake, board),
              self._get_tail_dist_penalty(snake, board),
-             self._get_open_squares(board, snake),
+             voronoi(snake, board),
              self._get_food_score(board, snake)])
 
     def _in_larger_snake_range_penalty(self, snake, board):

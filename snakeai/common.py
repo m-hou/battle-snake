@@ -2,6 +2,7 @@ import heapq
 import sys
 from snakemodel.board import EntityId
 from snakemodel.snake import Move
+from snakemodel.cell import Cell
 
 CANT_FIND = 1000000
 
@@ -68,3 +69,40 @@ def get_travel_distance(board, start_cell, end_cells, prune=sys.maxsize):
                     cost_map[neighbour_cell] = distance_travelled
         visited.add(curr_cell)
     return CANT_FIND, None
+
+
+def voronoi(my_snake, board):
+    """Voronoi"""
+
+    count = 0
+    distance_maps = {snake: get_distance_map(board, snake)
+                     for snake in board.get_snakes()}
+    board_cells = [Cell(x, y)
+                   for x in range(board.width)
+                   for y in range(board.height)]
+    for cell in board_cells:
+        if distance_maps[my_snake] == min(
+            distance_maps.values(),
+            key=lambda dist_map: dist_map.get(cell, CANT_FIND)
+        ):
+            count += 1
+    return 0
+
+
+def get_distance_map(board, snake):
+    visited = set()
+    to_visit = [(snake.head, 0)]
+    distance_map = {snake.head: 0}
+
+    while to_visit:
+        curr_cell, dist = to_visit.pop()
+        if (curr_cell not in visited
+                and board.cell_within_bounds(curr_cell)
+                and (board.get_entity_at_cell(curr_cell) in
+                     [EntityId.EMPTY, EntityId.FOOD]
+                     or curr_cell == snake.head)):
+            distance_map[curr_cell] = dist
+            for move in Move:
+                to_visit.append((move.apply_move_to_cell(curr_cell), dist + 1))
+        visited.add(curr_cell)
+    return distance_map
