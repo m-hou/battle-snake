@@ -37,7 +37,8 @@ def get_travel_distance(board, start_cell, end_cells, prune=sys.maxsize):
     """
 
     def closest_target(cell):
-        return min([cell.distance(end_cell) for end_cell in end_cells])
+        return min([cell.distance(end_cell) * (2 if board.on_edge(cell) else 1)
+                    for end_cell in end_cells])
 
     visited = set()
     to_visit = [(closest_target(start_cell), start_cell)]
