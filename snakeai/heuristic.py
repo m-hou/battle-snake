@@ -36,11 +36,11 @@ class Heuristic():
             [self._in_larger_snake_range_penalty(snake, board),
              self._get_tail_dist_penalty(snake, board),
              self._get_open_squares(board, snake),
-             self._get_food_score(board, snake)])
+             self._get_food_score(
+                 board, snake) + self._scary_snake_head_penalty(snake, board)])
 
     def _in_larger_snake_range_penalty(self, snake, board):
         """Penalty if in the range (next move) of a larger snake."""
-
         for enemy in board.get_snakes():
             if enemy is not snake and len(enemy) >= len(snake):
                 for _, enemy_head in enemy.get_possible_moves().items():
@@ -66,7 +66,6 @@ class Heuristic():
         tail_dist_penalty = -min_so_far if (
             min_so_far == CANT_FIND) else (
             min(0, allowable_tail_dist - min_so_far))
-        print(min_so_far)
         return tail_dist_penalty
 
     def _get_open_squares(self, board, snake):
@@ -93,3 +92,12 @@ class Heuristic():
         else:
             return 2 + (self.MAX_HEALTH - snake.health_points) / (
                 self.MAX_HEALTH) * (board.width + board.height)
+
+    def _scary_snake_head_penalty(self, my_snake, board):
+        """Avoid snake heads that are larger."""
+        scary_snake_heads = [snake.head for snake in board.get_snakes()
+                             if snake != my_snake and
+                             len(snake) >= len(my_snake)]
+        closest_dist, _ = get_travel_distance(
+            board, my_snake.head, scary_snake_heads)
+        return closest_dist * self.FOOD_SCORE / 3
