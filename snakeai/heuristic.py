@@ -60,7 +60,7 @@ class Heuristic():
         for seeker in board.get_snakes():
             min_dist, head = get_travel_distance(
                 board,
-                seeker.body[0],
+                seeker.body[-1],
                 targets,
                 min_so_far)
             if head == snake.head:
