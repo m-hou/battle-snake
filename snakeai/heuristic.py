@@ -47,29 +47,22 @@ class Heuristic():
         return 0
 
     def _get_tail_dist_penalty(self, snake, board):
-        max_dist_to_tail = self._get_max_dist_from_tail(snake, board)
+        allowable_tail_dist = self._allowable_tail_dist(snake, board)
 
         min_so_far = CANT_FIND
-        for target in board.get_snakes():
-            tail = target.body[-1]
-            min_my_dist = min_so_far
-            min_other_dist = CANT_FIND
-            for seeker in board.get_snakes():
-                if seeker == snake:
-                    min_my_dist = get_travel_distance(
-                        board, seeker.head, tail, min_my_dist)
-                else:
-                    min_other_dist = get_travel_distance(
-                        board,
-                        seeker.head,
-                        tail,
-                        min(min_other_dist, min_my_dist))
-            if (min_other_dist > min_my_dist):
-                min_so_far = min(min_so_far, min_my_dist)
+        # make the targets the heads instead of the tails so that we
+        # can take advanatage of multi-target a-star
+        targets = [target.head for target in board.get_snakes()]
+        for seeker in board.get_snakes():
+            min_dist, head = get_travel_distance(
+                board, seeker.body[-1], targets, min_so_far)
+            if head == snake.head:
+                min_so_far = min_dist
 
         tail_dist_penalty = -min_so_far if (
             min_so_far == CANT_FIND) else (
-            min(0, max_dist_to_tail - min_so_far))
+            min(0, allowable_tail_dist - min_so_far))
+        print(min_so_far)
         return tail_dist_penalty
 
     def _get_open_squares(self, board, snake):
@@ -84,7 +77,7 @@ class Heuristic():
         length_score = len(snake.body) * self.FOOD_SCORE
         return -food_evaluation + length_score
 
-    def _get_max_dist_from_tail(self, snake, board):
+    def _allowable_tail_dist(self, snake, board):
         """Threshold where there is no penalty for being too far from tail."""
 
         if snake.health_points == self.MAX_HEALTH:

@@ -53,3 +53,10 @@ class TestSnakeAI(unittest.TestCase):
             set(snake_ai.get_candidate_moves(curr_game.you, curr_game.board)),
             set([Move.UP, Move.DOWN]))
         self.assertEqual(snake_ai.best_move(), Move.DOWN.get_move())
+
+    def test_next_to_same_size_snake(self):
+        """Going left will potentially crash into same size snake"""
+        curr_game = load_game('test_cases/next_to_same_size_snake.json')
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(curr_game, heuristic)
+        self.assertNotEquals(snake_ai.best_move(), Move.LEFT.get_move())
