@@ -71,9 +71,7 @@ class Heuristic():
         return reachable_squares + squares_occupied
 
     def _get_food_score(self, board, snake):
-        food_evaluation = CANT_FIND
-        for food in board.food:
-            food_evaluation = min(food_evaluation, food.distance(snake.head))
+        food_evaluation, _ = get_travel_distance(board, snake.head, board.food)
         length_score = len(snake.body) * self.FOOD_SCORE
         return -food_evaluation + length_score
 
