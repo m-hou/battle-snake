@@ -93,8 +93,7 @@ class SnakeAI():
         def _could_snake_die_other_snakes_transition(possible_transition):
             """Could snake die from any transition of another snake."""
             head_cell = possible_head.head_cell
-            (other_body_cells, other_possible_heads,
-             other_snake) = possible_transition
+            other_body_cells, _, _ = possible_transition
             could_overlap_body = head_cell in other_body_cells
             return not could_overlap_body
 

@@ -61,7 +61,9 @@ def get_travel_distance(board, start_cell, end_cells, prune=sys.maxsize):
                     to_visit,
                     (distance_travelled + closest_target(neighbour_cell),
                      neighbour_cell))
-                if distance_travelled < cost_map.get(neighbour_cell, CANT_FIND):
+                if distance_travelled < cost_map.get(
+                    neighbour_cell, CANT_FIND
+                ):
                     cost_map[neighbour_cell] = distance_travelled
         visited.add(curr_cell)
     return CANT_FIND, None

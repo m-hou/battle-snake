@@ -39,6 +39,8 @@ class Heuristic():
              self._get_food_score(board, snake)])
 
     def _in_larger_snake_range_penalty(self, snake, board):
+        """Penalty if in the range (next move) of a larger snake."""
+
         for enemy in board.get_snakes():
             if enemy is not snake and len(enemy) >= len(snake):
                 for _, enemy_head in enemy.get_possible_moves().items():
@@ -47,6 +49,8 @@ class Heuristic():
         return 0
 
     def _get_tail_dist_penalty(self, snake, board):
+        """Penalty for being too far away from a tail."""
+
         allowable_tail_dist = self._allowable_tail_dist(snake, board)
 
         min_so_far = CANT_FIND
@@ -66,11 +70,15 @@ class Heuristic():
         return tail_dist_penalty
 
     def _get_open_squares(self, board, snake):
+        """Total number of reachable squares."""
+
         reachable_squares = safe_square_count(board, snake.head)
         squares_occupied = len(snake.body)
         return reachable_squares + squares_occupied
 
     def _get_food_score(self, board, snake):
+        """Incentive to approach closest food."""
+
         food_evaluation, _ = get_travel_distance(board, snake.head, board.food)
         length_score = len(snake.body) * self.FOOD_SCORE
         return -food_evaluation + length_score
