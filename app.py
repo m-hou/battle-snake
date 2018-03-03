@@ -18,7 +18,7 @@ def start():
     snake = {
         "color": os.environ.get('color', '#ffffff'),
         "name": os.environ.get('name', 'default_snake_boi'),
-        "avatar": os.environ.get(
+        "head_url": os.environ.get(
             'icon', 'https://cdn.frankerfacez.com/emoticon/233181/4'),
         "taunt": "POGGERS",
         "head_type": 'dead',
