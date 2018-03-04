@@ -140,6 +140,5 @@ class Heuristic():
             closest = min(board.snakes.values(),
                             key=lambda a_snake: a_snake.head.distance(
                                 Cell(x, y)))
-            close += (closest.id == snake.id) * (
-                1 if cell == EntityId.FOOD else 1)
+            close += closest.id == snake.id
         return close / (len(empty_row) + 1)
