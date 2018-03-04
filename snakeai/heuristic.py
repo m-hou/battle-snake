@@ -99,8 +99,8 @@ class Heuristic():
 
         reachable_squares = safe_square_count(board, snake.head)
         squares_occupied = len(snake.body)
-        if snake.head.distance(snake.body[-1]):
-            reachable_squares += squares_occupied
+        # if snake.head.distance(snake.body[-1]):
+        #     reachable_squares += squares_occupied
         return reachable_squares + squares_occupied
 
     def _get_food_score(self, board, snake):
@@ -141,5 +141,5 @@ class Heuristic():
                             key=lambda a_snake: a_snake.head.distance(
                                 Cell(x, y)))
             close += (closest.id == snake.id) * (
-                20 if cell == EntityId.FOOD else 1)
+                1 if cell == EntityId.FOOD else 1)
         return close / (len(empty_row) + 1)
