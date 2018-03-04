@@ -60,3 +60,10 @@ class TestSnakeAI(unittest.TestCase):
         heuristic = Heuristic()
         snake_ai = SnakeAI(curr_game, heuristic)
         self.assertNotEquals(snake_ai.best_move(), Move.LEFT.get_move())
+
+    def test_too_close_to_tail_eat(self):
+        """Going left will potentially crash into same size snake"""
+        curr_game = load_game('test_cases/a.json')
+        heuristic = Heuristic()
+        snake_ai = SnakeAI(curr_game, heuristic)
+        self.assertEqual(snake_ai.best_move(), Move.UP.get_move())

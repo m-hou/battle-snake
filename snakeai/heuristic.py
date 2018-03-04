@@ -35,6 +35,11 @@ class Heuristic():
 
         snake = board.snakes[snake_id]
 
+        if snake.health_points == 100 and (
+            snake.head.distance(snake.body[-1]) == 1
+        ):
+            return np.array([-5000, 0, 0, 0])
+
         if snake.health_points > (board.width + board.height):
             return np.array(
                 [self._in_larger_snake_range_penalty(snake, board),
