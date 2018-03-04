@@ -18,8 +18,6 @@ def start():
     snake = {
         "color": os.environ.get('color', '#ffffff'),
         "name": os.environ.get('name', 'default_snake_boi'),
-        "head_url": os.environ.get(
-            'icon', 'https://media3.giphy.com/media/3o7TKHKjrDyqphX9Cg/source.gif'),
         "taunt": "POGGERS",
         "head_type": 'dead',
         "tail_type": 'pixel'
