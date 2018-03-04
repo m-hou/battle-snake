@@ -35,7 +35,6 @@ def move():
         game = Game(data)
         heuristic = Heuristic()
         snake_ai = SnakeAI(game, heuristic)
-        print(data)
         best_move = snake_ai.best_move()
     except Exception as exception:
         app.logger.info(data)

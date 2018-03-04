@@ -57,7 +57,7 @@ class Heuristic():
         else:
             return np.array(
                 [self._in_larger_snake_range_penalty(snake, board),
-                 self._get_food_score(board, snake),
+                 -100000 + self._get_food_score(board, snake),
                  self._get_tail_dist_penalty(snake, board),
                  self._get_open_squares(board, snake),
                  self.closest_to_most(snake, board)])
