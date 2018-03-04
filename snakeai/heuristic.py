@@ -2,6 +2,7 @@ import numpy as np
 from .common import safe_square_count
 from .common import get_travel_distance
 from .common import voronoi
+from snakemodel.snake import Move
 from .common import CANT_FIND
 from snakemodel.board import EntityId
 from snakemodel.cell import Cell
@@ -35,10 +36,16 @@ class Heuristic():
 
         snake = board.snakes[snake_id]
 
-        if snake.health_points == 100 and (
-            snake.head.distance(snake.body[-1]) == 1
-        ):
-            return np.array([-5000, 0, 0, 0])
+        # if snake.health_points == 100 and (
+        #     snake.head.distance(snake.body[-1]) == 1
+        # ):
+
+        #     cells = [move.apply_move_to_cell(snake.head) for move in Move]
+        #     for cell in cells:
+        #         x, y = cell.x, cell.y
+        #         if (board.get_entity_at_pos(x, y) in [EntityId.FOOD, EntityId.EMPTY]):
+        #             break
+        #     return np.array([-5000, 0, 0, 0])
 
         if snake.health_points > (board.width + board.height):
             return np.array(
@@ -54,7 +61,6 @@ class Heuristic():
                  self._get_tail_dist_penalty(snake, board),
                  self._get_open_squares(board, snake),
                  self.closest_to_most(snake, board)])
-        return np.concatenate((scores, food_scores))
 
     def _in_larger_snake_range_penalty(self, snake, board):
         """Penalty if in the range (next move) of a larger snake."""
@@ -126,13 +132,12 @@ class Heuristic():
         close = 0
         empty_row = [(cell, x, y) for y, row in enumerate(board.board)
                      for x, cell in enumerate(row)
-                     if cell == EntityId.EMPTY]
+                     if cell in [EntityId.EMPTY, EntityId.FOOD]]
 
         for (cell, x, y) in empty_row:
-            if cell == EntityId.EMPTY:
-                closest = min(board.snakes.values(),
-                              key=lambda a_snake: a_snake.head.distance(
-                                  Cell(x, y)))
-                close += (closest.id == snake.id) * (
-                    20 if cell == EntityId.FOOD else 1)
+            closest = min(board.snakes.values(),
+                            key=lambda a_snake: a_snake.head.distance(
+                                Cell(x, y)))
+            close += (closest.id == snake.id) * (
+                20 if cell == EntityId.FOOD else 1)
         return close / (len(empty_row) + 1)
