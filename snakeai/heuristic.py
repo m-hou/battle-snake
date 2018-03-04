@@ -35,16 +35,20 @@ class Heuristic():
 
         snake = board.snakes[snake_id]
 
-        scores = np.array(
-            [self._in_larger_snake_range_penalty(snake, board),
-             self._get_tail_dist_penalty(snake, board),
-             self._get_open_squares(board, snake)])
-        food_scores = np.array([
-            self._get_food_score(board, snake),
-            self.closest_to_most(snake, board)
-        ])
-        food_scores = food_scores if (
-            snake.health_points < 30) else food_scores[::-1]
+        if snake.health_points > (board.width + board.height):
+            return np.array(
+                [self._in_larger_snake_range_penalty(snake, board),
+                 self._get_tail_dist_penalty(snake, board),
+                 self._get_open_squares(board, snake),
+                 self.closest_to_most(snake, board),
+                 self._get_food_score(board, snake)])
+        else:
+            return np.array(
+                [self._in_larger_snake_range_penalty(snake, board),
+                 self._get_food_score(board, snake),
+                 self._get_tail_dist_penalty(snake, board),
+                 self._get_open_squares(board, snake),
+                 self.closest_to_most(snake, board)])
         return np.concatenate((scores, food_scores))
 
     def _in_larger_snake_range_penalty(self, snake, board):
