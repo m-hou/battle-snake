@@ -42,4 +42,5 @@ __Better heuristic__ - the meta-game changed a lot from last year. Once we got t
 #### Special Thanks
 
 __[ahendy](https://github.com/ahendy)__ - my teammate for the competition. He helped me brainstorm ideas and reviewed my code.
+
 __[a1k0n](https://www.a1k0n.net/2010/03/04/google-ai-postmortem.html)__ - published a blog post with details about voronoi partitioning applied to another AI competition
